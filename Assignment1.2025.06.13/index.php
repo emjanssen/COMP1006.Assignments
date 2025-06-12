@@ -17,7 +17,9 @@
 
 <div id="page-container">
     <main>
-        <section class="index-form-class">
+
+        <div class="main-box-one">
+        <section class="index-form-class" id="index-form">
             <form method="post" id="index-form-id">
                 <p>
                     <label for="name">Name:</label><br>
@@ -36,6 +38,14 @@
                 </p>
             </form>
         </section>
+        </div>
+
+        <div class="main-box-two">
+        </div>
+
+        <div class="main-box-three">
+        </div>
+
     </main>
 </div>
 
