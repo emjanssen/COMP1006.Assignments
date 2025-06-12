@@ -6,9 +6,6 @@
 }
 
 :root {
-
-    /* font: family, colours, style */
-
     /* background colours */
     --header-background-colour: cyan;
     --footer-background-colour: cyan;
@@ -45,8 +42,15 @@
 .header-navigation,
 .footer-navigation {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+}
+
+.header-logo img,
+.footer-logo img {
+    width: auto;
+    margin: .5rem;
+    max-height: 4rem;
 }
 
 .header-navigation-ul,
