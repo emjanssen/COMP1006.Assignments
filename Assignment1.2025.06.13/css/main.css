@@ -1,0 +1,6 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* for any padding, margin, and box-sizing values that aren't reset via normalize.css */
+}
