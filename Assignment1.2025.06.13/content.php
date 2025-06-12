@@ -10,12 +10,21 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/main.js" type="text/javascript" defer></script>
 </head>
-<header id="header-global"></header>
+
 <body>
 
+<header id="header-global"></header>
+
+<div id="page-container">
+    <main>
 
 
+
+    </main>
+</div>
+
+<footer id="footer-global"></footer>
 
 </body>
-<footer id="footer-global"></footer>
+
 </html>

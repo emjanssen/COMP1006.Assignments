@@ -4,3 +4,43 @@
     box-sizing: border-box;
     /* for any padding, margin, and box-sizing values that aren't reset via normalize.css */
 }
+
+:root {
+    /* font: family, colours, style */
+
+    /* background colours */
+    --header-background-colour: #ffffff;
+    --footer-background-colour: #ffffff;
+    --body-background-colour: #ffffff;
+}
+
+#page-container {
+    background-color: var(--body-background-colour);
+}
+
+main {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+}
+
+#header-global {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--header-background-colour);
+    border: 1px solid green;
+    height: 5rem;
+}
+
+#footer-global {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--footer-background-colour);
+    border: 1px solid orange;
+    height: 4rem;
+}
