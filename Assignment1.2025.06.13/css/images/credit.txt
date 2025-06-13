@@ -1,3 +1,4 @@
-Logo: https://pixabay.com/illustrations/company-company-logo-logo-design-7759278/
+Header logo: https://pixabay.com/illustrations/company-company-logo-logo-design-7759278/
+Footer logo: https://pixabay.com/vectors/logo-hexagonal-6-giac-2418172/
 Skyline: https://pixabay.com/illustrations/building-city-landscape-nature-8320842/
 City: https://pixabay.com/illustrations/city-urban-landscape-town-6931092/
