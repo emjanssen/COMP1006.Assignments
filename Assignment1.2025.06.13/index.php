@@ -38,7 +38,7 @@
     <div class="main-box-three">
 
         <section class="index-form" id="index-form">
-            <form method="post" id="index-form-id">
+            <form method="post" id="index-form-id" action="add.php">
                 <h3 id="form-title">Hours Worked</h3>
 
                 <div id="form-box-one">
@@ -51,7 +51,7 @@
 
                 <div id="form-box-two">
                     <label for="week">Date:</label>
-                    <input type="week" id="week" name="week">
+                    <input type="text" id="week" name="week">
 
                     <label for="hours">Hours:</label>
                     <input type="text" id="hours" name="hours" placeholder="Please enter the hours worked.">

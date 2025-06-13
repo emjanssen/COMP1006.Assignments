@@ -17,19 +17,11 @@ if (isset($_POST['submit'])) {
 
     $msg = $valid->checkEmpty($_POST, array('employeeName', 'employeeID', 'week', 'hours'));
 
-    if ($msg != null) {
-        echo "<p>$msg</p>";
-        echo "<a href='javascript:self.history.back();'>Go Back</a>";
+    if ($msg == null) {
+        $crud->execute("INSERT INTO assignment_one (employee_id, employee_name, date_worked, hours_worked) VALUES ('$employeeID', '$employeeName', '$week', '$hours')");
+        echo "Record added";
     } else {
-        $result = $crud->execute("INSERT INTO your_table_name (employeeName, employeeID, week, hours) VALUES ('$employeeName', '$employeeID', '$week', '$hours')");
-
-        if ($result) {
-            echo "<p>Record added</p>";
-            echo "<a href='review.php'>View Results</a>";
-        } else {
-            echo "<p>Error adding record</p>";
-            echo "<a href='javascript:self.history.back();'>Go Back</a>";
-        }
+        echo $msg;
     }
 }
 ?>
