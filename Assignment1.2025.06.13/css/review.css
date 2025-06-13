@@ -8,14 +8,16 @@
 }
 
 #review-table {
-    display: flex;
+    width: auto;
+    height: auto;
+    margin: 2rem;
+    align-self: flex-start;
+    border-collapse: collapse;
+    /*merge borders of adjacent cells */
+    border: groove 1rem var(--form-border-color);
 }
 
-#review-table-tr {
-    display: flex;
-    gap: 2rem;
-    border: groove .5rem var(--form-border-color);
+#review-table th,
+#review-table td {
     padding: 1rem;
-    padding-bottom: 20rem;
-    margin: 2rem;
 }
