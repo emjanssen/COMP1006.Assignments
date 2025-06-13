@@ -1,9 +1,21 @@
 /* Main */
 
-#review-page-container { /* ID for main class; contains everything except header and footer */
+#review-page-container { /* ID for review class; contains everything except header and footer */
     padding-top: 5rem;
     padding-bottom: 5rem;
     height: 100vh;
     display: flex;
 }
 
+#review-table {
+    display: flex;
+}
+
+#review-table-tr {
+    display: flex;
+    gap: 2rem;
+    border: groove .5rem var(--form-border-color);
+    padding: 1rem;
+    padding-bottom: 20rem;
+    margin: 2rem;
+}

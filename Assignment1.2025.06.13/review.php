@@ -18,7 +18,28 @@
 
 <main id="review-page-container">
 
+    <table id="review-table">
+        <?php include 'crud.php';
+        $crud = new crud();
+        $query = "SELECT * FROM assignment_one";
+        $result = $crud->getData($query); ?>
 
+        <tr id="review-table-tr">
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Day Worked</th>
+            <th>Hours Worked</th>
+        </tr>
+
+        <?php foreach ($result as $key => $res) {
+            echo "<tr>";
+            echo "<td>" . $res['employee_id'] . "</td>";
+            echo "<td>" . $res['employee_name'] . "</td>";
+            echo "<td>" . $res['date_worked'] . "</td>";
+            echo "<td>" . $res['hours_worked'] . "</td>";
+            echo "</tr>";
+        } ?>
+    </table>
 
 </main>
 

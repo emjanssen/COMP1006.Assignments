@@ -1,5 +1,5 @@
 <?php
-// purpose: input validation
+// purpose: validate user input
 class validate {
     public function checkEmpty($data, $fields) {
         // create function that takes two arguments
