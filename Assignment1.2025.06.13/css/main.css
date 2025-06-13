@@ -137,18 +137,18 @@ a {
 }
 
 a:link {
-    color: #2e2eda;
-}
-
-a:visited {
     color: #073d07;
 }
 
+a:visited {
+    color: #28253f;
+}
+
 a:hover {
-    color: yellow;
+    color: #7a7a50;
     transform: scale(0.98);
 }
 
 a:active {
-    color: red;
+    color: #d7a39a;
 }
