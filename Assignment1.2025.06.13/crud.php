@@ -1,5 +1,6 @@
 <?php
 require_once "database.php";
+// purpose: functions to interact with the database
 
 class crud extends database
 {
