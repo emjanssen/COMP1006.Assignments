@@ -19,28 +19,43 @@
 <main id="review-page-container">
 
     <table id="review-table">
+
         <?php include 'crud.php';
         $crud = new crud();
+        // create new crud object; allows us to access crud and database functions
+
         $query = "SELECT * FROM assignment_one";
-        $result = $crud->getData($query); ?>
+        // run query to select all date from assignment_one table in database
+        $result = $crud->getData($query);
+        // use the getData() function in crud class; pass in $query value, and assign outcome to $result
+        ?>
 
         <tr id="review-table-tr">
+            <!--creates our table headings -->
             <th>Employee ID</th>
             <th>Employee Name</th>
             <th>Day Worked</th>
             <th>Hours Worked</th>
         </tr>
 
-        <?php foreach ($result as $key => $res) {
+        <?php
+        foreach ($result as $res) {
+            // iterate over each value in $results array
+
             echo "<tr>";
-            echo "<td>" . $res['employee_id'] . "</td>";
-            echo "<td>" . $res['employee_name'] . "</td>";
-            echo "<td>" . $res['date_worked'] . "</td>";
-            echo "<td>" . $res['hours_worked'] . "</td>";
+            // start a new table row
+            echo "<td>" . htmlspecialchars($res['employee_id']) . "</td>";
+            // add current $res value to table: employee_id, with special characters escaped
+            echo "<td>" . htmlspecialchars($res['employee_name']) . "</td>";
+            // add current $res value to table: employee_name, with special characters escaped
+            echo "<td>" . htmlspecialchars($res['date_worked']) . "</td>";
+            // add current $res value to table: date_worked, with special characters escaped
+            echo "<td>" . htmlspecialchars($res['hours_worked']) . "</td>";
+            // add current $res value to table: hours_worked, with special characters escaped
             echo "</tr>";
+            // end of the table row
         } ?>
     </table>
-
 </main>
 
 <footer id="footer-global"></footer>
