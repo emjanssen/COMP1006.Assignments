@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,69 +8,31 @@
 }
 
 :root {
-    /* background colours */
-    --header-background-colour: cyan;
-    --footer-background-colour: cyan;
-    --body-background-colour: lightgreen;
+
+    --gradient-one-color: #a8edea;
+    --gradient-two-color: #fed6e3;
+
+    --gradient-background-colour: linear-gradient(45deg, var(--gradient-one-color), var(--gradient-two-color));
+
+    --footer-background-colour: rgba(88, 141, 143, 0.76);
+    --header-background-colour: rgba(119, 72, 119, 0.43);
+
+    --form-border-color: rgba(170, 165, 185, 0.8);
+    --form-background-colour: rgba(152, 166, 165, 0.28);
+
+    --font-family-indie-flower: "Indie Flower", cursive;
 }
 
 body {
-    background-color: var(--body-background-colour);
+    background: var(--gradient-background-colour);
+    font-family: var(--font-family-indie-flower);
 }
 
-/* Main */
-
-#page-container { /* ID for main class; contains everything except header and footer */
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-    height: 100vh;
-    display: flex;
+body p {
+    font-size: 1.05rem;
 }
 
-.main-box-one,
-.main-box-three {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 30%;
-}
-
-.main-box-two {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 39%;
-}
-
-.main-box-one,
-.main-box-two {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.main-box-one img {
-    height: auto;
-    max-width: 70%;
-}
-
-.main-box-one p,
-.main-box-two p {
-    font-style: italic;
-    max-width: 90%;
-    justify-self: center;
-}
-
-.main-box-two img {
-    height: auto;
-    max-width: 90%;
-    padding-top: 1rem;
-}
-
-/* Header and Footer */
+/* Header */
 
 #header-global {
     position: fixed;
@@ -80,6 +44,43 @@ body {
     height: 5rem;
 }
 
+.header-navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-navigation-li {
+    list-style-type: none;
+}
+
+#header-box-one {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+#header-box-two {
+    display: flex;
+    align-items: center;
+}
+
+.header-navigation-ul {
+    display: flex;
+}
+
+.header-navigation-li {
+    margin: 1rem;
+}
+
+.header-logo img {
+    width: auto;
+    margin: .5rem;
+    max-height: 4rem;
+    border: .15rem var(--form-border-color) solid;
+}
+
+/* Footer */
+
 #footer-global {
     position: fixed;
     bottom: 0;
@@ -87,34 +88,67 @@ body {
     width: 100%;
     z-index: 1000;
     background-color: var(--footer-background-colour);
-    height: 5rem;
+    height: 5.5rem;
 }
 
-.header-navigation,
 .footer-navigation {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: center;
+
 }
 
-.header-logo img,
 .footer-logo img {
     width: auto;
     margin: .5rem;
     max-height: 4rem;
 }
 
-.header-navigation-ul,
+#footer-box-one {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
 .footer-navigation-ul {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
-    padding-right: 2rem;
 }
 
-.header-navigation-li,
+.footer-navigation-li {
+    margin: .25rem;
+}
+
 .footer-navigation-li {
     list-style-type: none;
 }
 
+.footer-navigation-li a {
+    font-size: 1.15rem;
+}
+
 /* Links */
+
+a {
+    display: inline-block;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    font-size: 1.5rem;
+}
+
+a:link {
+    color: #2e2eda;
+}
+
+a:visited {
+    color: #073d07;
+}
+
+a:hover {
+    color: yellow;
+    transform: scale(0.98);
+}
+
+a:active {
+    color: red;
+}

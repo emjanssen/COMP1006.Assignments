@@ -1,0 +1,85 @@
+/* Main */
+
+#main-page-container { /* ID for main class; contains everything except header and footer */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    height: 100vh;
+    display: flex;
+}
+
+.main-box-one,
+.main-box-three {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30%;
+}
+
+.main-box-two {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 39%;
+}
+
+.main-box-one,
+.main-box-two,
+.main-box-three {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-box-one img {
+    height: auto;
+    max-width: 70%;
+    border: 1rem groove var(--form-border-color);
+    margin: 1rem;
+}
+
+.main-box-two img {
+    height: auto;
+    max-width: 90%;
+    border: 1rem groove var(--form-border-color);
+}
+
+.main-box-one p,
+.main-box-two p,
+.main-box-three p {
+    font-style: italic;
+    max-width: 90%;
+    justify-self: center;
+}
+
+#index-form p {
+    font-style: normal;
+}
+
+#index-form {
+    border: .5rem groove var(--form-border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    min-width: 60%;
+    background-color: var(--form-background-colour);
+}
+
+#form-box-one,
+#form-box-two,
+#form-box-three {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    gap: 1rem;
+    justify-content: flex-start;
+}
+
+#index-form input[type="text"],
+#index-form input[type="week"],
+#index-form input[type="submit"] {
+    width: 90%;
+    min-height: 3rem;
+    padding: 0.5rem;
+}

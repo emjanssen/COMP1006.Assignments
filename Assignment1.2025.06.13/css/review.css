@@ -1,0 +1,9 @@
+/* Main */
+
+#review-page-container { /* ID for main class; contains everything except header and footer */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    height: 100vh;
+    display: flex;
+}
+
