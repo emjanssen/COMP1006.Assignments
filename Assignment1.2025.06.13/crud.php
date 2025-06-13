@@ -1,56 +1,65 @@
 <?php
-// Include the database connection class
 require_once "database.php";
 
-// Define a class named 'crud' that extends the 'database' class
-class crud extends database {
-
-    // Constructor: Automatically called when an object is created
-    public function __construct() {
-        // Call the parent constructor to establish a database connection
+class crud extends database
+{
+    public function __construct()
+    {
+        // creates constructor method for crud class
         parent::__construct();
+        // calls database constructor
+        // ensures that when we create a crud object, the code executed by database constructor is also executed
     }
 
-    // Method to retrieve data from the database
-    public function getData($query) {
-        // Execute the provided SQL query
+    public function getData($query)
+    {
+        // creates new function that takes one argument
         $result = $this->connection->query($query);
+        // using built-in query function
+        // $this->connection is from database.php
+        // executes query on this instance of connection
+        // $result holds the info returned by the SQL database query; i.e. it holds all the rows that match the query
 
-        // If the query fails, return false
         if ($result == false) {
+            // if the query failed, return false
             return false;
         }
-
-        // Initialize an array to store the rows of the result set
         $rows = array();
-
-        // Fetch each row as an associative array and add it to $rows
+        // creates an empty array named $rows
         while ($row = $result->fetch_assoc()) {
+            // uses built-in $result->fetch_assoc() method
+            // this function fetches the next row from the result set (as an associative array)
+            // associative array: keys are column names, values are corresponding data for that row
+            // while loop stops once there are no more rows to fetch
             $rows[] = $row;
+            // appends the current $row associative array to the $rows array
         }
-
-        // Return the array of rows
+        // return the final value of $rows array
         return $rows;
     }
 
-    // Method to execute a query that does not return data (e.g., INSERT, UPDATE, DELETE)
-    public function execute($query) {
-        // Run the provided SQL query
+    public function execute($query)
+    {
+        // creates function that takes one argument
         $result = $this->connection->query($query);
-
-        // Return false if the query fails
+        // executes query on this instance of connection using $query value
+        // stores result in $result
         if ($result == false) {
+            // if query fails, return false
             return false;
         } else {
-            // Return true if the query succeeds
+            // if connection doesn't fail, return true
             return true;
         }
     }
 
-    // Method to safely escape a string for use in a SQL query
-    public function escape_string($value) {
-        // Return the escaped version of the input value
+    public function escape_string($value)
+    {
+        // creates new function that takes on value
         return $this->connection->real_escape_string($value);
+        // real_escape_string() is a built-in function
+        // it escapes (i.e. adds backslashes to) special characters so they are safe for sql queries
     }
 }
+
 ?>
