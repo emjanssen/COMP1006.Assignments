@@ -12,7 +12,7 @@ headerGlobal.innerHTML = `
         
         <ul class="header-navigation-ul">
             <li class="header-navigation-li"><a href="/index.php">Input Hours</a></li>
-            <li class="header-navigation-li"><a href="/content.php">Review Content</a></li>
+            <li class="header-navigation-li"><a href="/content.php">Review Hours</a></li>
         </ul>    
     </nav>`;
 
@@ -26,6 +26,6 @@ footerGlobal.innerHTML = `
     
         <ul class="footer-navigation-ul">
             <li class="footer-navigation-li"><a href="/index.php">Input Hours</a></li>
-            <li class="footer-navigation-li"><a href="/content.php">Review Content</a></li>
+            <li class="footer-navigation-li"><a href="/content.php">Review Hours</a></li>
         </ul>    
     </nav>`;

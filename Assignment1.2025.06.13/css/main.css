@@ -12,12 +12,63 @@
     --body-background-colour: lightgreen;
 }
 
-#page-container {
+body {
     background-color: var(--body-background-colour);
+}
+
+/* Main */
+
+#page-container { /* ID for main class; contains everything except header and footer */
     padding-top: 5rem;
     padding-bottom: 5rem;
     height: 100vh;
+    display: flex;
 }
+
+.main-box-one,
+.main-box-three {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 30%;
+}
+
+.main-box-two {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 39%;
+}
+
+.main-box-one,
+.main-box-two {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-box-one img {
+    height: auto;
+    max-width: 70%;
+}
+
+.main-box-one p,
+.main-box-two p {
+    font-style: italic;
+    max-width: 90%;
+    justify-self: center;
+}
+
+.main-box-two img {
+    height: auto;
+    max-width: 90%;
+    padding-top: 1rem;
+}
+
+/* Header and Footer */
 
 #header-global {
     position: fixed;
@@ -65,3 +116,5 @@
 .footer-navigation-li {
     list-style-type: none;
 }
+
+/* Links */

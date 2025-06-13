@@ -15,39 +15,55 @@
 
 <header id="header-global"></header>
 
-<div id="page-container">
-    <main>
+<main id="page-container">
 
-        <div class="main-box-one">
+    <div class="main-box-one">
+        <img src="css/images/box_one_skyline.png" alt="City Skyline">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis consequatur doloremque dolores,
+            laudantium maiores molestias praesentium quibusdam quos veritatis voluptas. A alias autem, distinctio fugit
+            officiis repellat sed temporibus tenetur?</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque doloribus dolorum facere, fuga illum
+            molestiae nemo, nesciunt nulla obcaecati odit optio perferendis provident, quos repellendus sint sunt
+            tenetur ut voluptates.</p>
+    </div>
+
+    <div class="main-box-two">
+        <h2>Company Information</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa esse illo ipsa ipsum, quam rem repellendus
+            saepe tempora! Ab amet debitis laudantium molestiae nemo odio repellendus reprehenderit totam voluptate.
+            Possimus!</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque consectetur cumque esse exercitationem iusto
+            minus nostrum possimus repudiandae. Alias cupiditate est magni molestias necessitatibus perspiciatis quidem
+            tempore unde vel veniam.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab beatae culpa deserunt dicta ea eum eveniet ex,
+            inventore ipsam labore libero necessitatibus odit officiis provident quasi sequi tenetur, veritatis
+            voluptatum!</p>
+        <img src="css/images/box_two_city.jpg" alt="City Street">
+    </div>
+
+    <div class="main-box-three">
         <section class="index-form-class" id="index-form">
             <form method="post" id="index-form-id">
                 <p>
-                    <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name" placeholder="Please enter your name.">
+                    <label for="employeeName">Employee Name:</label><br>
+                    <input type="text" id="employeeName" name="employeeName" placeholder="Please enter your name.">
                 </p>
                 <p>
                     <label for="employeeID">Employee ID:</label><br>
-                    <input type="text" id="employeeID" name="employeeID" placeholder="Please enter your employee ID".>
+                    <input type="text" id="employeeID" name="employeeID" placeholder="Please enter your employee ID" .>
                 </p>
                 <p>
-                    <label for="hours">Hours:</label><br>
-                    <input type="text" id="hours" name="hours" placeholder="Please enter your hours worked.">
+                    <label for="workWeek">Week:</label><br>
+                    <input type="week" id="workWeek" name="workWeek" placeholder="Please enter your hours worked.">
                 </p>
                 <p>
                     <input type="submit" value="Submit">
                 </p>
             </form>
         </section>
-        </div>
+    </div>
 
-        <div class="main-box-two">
-        </div>
-
-        <div class="main-box-three">
-        </div>
-
-    </main>
-</div>
+</main>
 
 <footer id="footer-global"></footer>
 
