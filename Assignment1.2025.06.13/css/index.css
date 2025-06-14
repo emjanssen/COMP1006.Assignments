@@ -66,6 +66,11 @@
     background-color: var(--form-background-colour);
 }
 
+#index-form label {
+    text-align: left;
+    width: 100%;
+}
+
 #form-box-one,
 #form-box-two,
 #form-box-three {
@@ -74,6 +79,7 @@
     margin: 1rem;
     gap: 1rem;
     justify-content: flex-start;
+    align-content: flex-start;
 }
 
 #index-form input[type="text"],
