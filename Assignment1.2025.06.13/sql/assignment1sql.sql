@@ -1,14 +1,17 @@
 CREATE TABLE assignment_one
 (
-    -- defines four columns: id, name, date, hours
-    employee_id    INT          NOT NULL AUTO_INCREMENT,
-    --each new row gets new id; will increment automatically
+    employee_id    INT NOT NULL,
+    -- user-provided ID; must be a whole number
+
     employee_name  VARCHAR(255) NOT NULL,
-    --names can have a max length of 255 characters
-    date_worked  DATE         NOT NULL,
-    -- date data type
-    hours_worked int          NOT NULL,
-    -- hours can be up to two digits but no higher
+    -- employee names can be up to 255 characters long
+
+    week_worked    DATE NOT NULL,
+    -- stores the week worked as a date
+
+    hours_worked   INT NOT NULL,
+    -- stores the number of hours worked as an int
+
     PRIMARY KEY (employee_id)
-    -- assigns id as the primary key
+    -- primary key will prevent duplicate employee_id entries
 );

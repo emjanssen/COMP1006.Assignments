@@ -23,18 +23,32 @@ if (isset($_POST['submit'])) {
     if ($msg == null) {
         // if message returned from checkEmpty() is null, we have no errors
 
-        $result = $crud->execute("INSERT INTO assignment_one (employee_id, employee_name, date_worked, hours_worked) VALUES ('$employeeID', '$employeeName', '$week', '$hours')");
+        if (!ctype_digit($employeeID) || !ctype_digit($hours)) {
+            // built-in boolean functions to validate id and hours inputs
+            // if either input isn't a digit, we echo an error message
+            echo "Employee ID and hours worked must both be whole numbers.";
+            // link back to index.php
+            echo "<p><a href='index.php'>Go Back</a></p>";
+            // exit code
+            exit();
+        }
+
+        $result = $crud->execute("INSERT INTO assignment_one (employee_id, employee_name, week_worked, hours_worked) VALUES ('$employeeID', '$employeeName', '$week', '$hours')");
         // use crud execute() to add data into assignment_one table
         if ($result) {
             // if query is successful (i.e. $result = true), redirect to review.php page, and then exit after redirect
             header("Location: review.php");
             exit();
-        } else { // if query is uncuessfully, send error message
+        } else { // if query is unsuccessfully, send error message
             echo "Error adding record";
+            // link back to index.php
+            echo "<p><a href='index.php'>Go Back</a></p>";
         }
     } else {
         echo $msg;
         // if message isn't null, we have errors; print message contents ("employeeName field cannot be empty", etc)
+        echo "<p><a href='index.php'>Go Back</a></p>";
+        // link back to index.php
     }
 }
 ?>

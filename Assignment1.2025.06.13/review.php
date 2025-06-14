@@ -34,7 +34,7 @@
             <!--creates our table headings -->
             <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Day Worked</th>
+            <th>Week Worked</th>
             <th>Hours Worked</th>
         </tr>
 
@@ -48,7 +48,7 @@
             // add current $res value to table: employee_id, with special characters escaped
             echo "<td>" . htmlspecialchars($res['employee_name']) . "</td>";
             // add current $res value to table: employee_name, with special characters escaped
-            echo "<td>" . htmlspecialchars($res['date_worked']) . "</td>";
+            echo "<td>" . htmlspecialchars($res['week_worked']) . "</td>";
             // add current $res value to table: date_worked, with special characters escaped
             echo "<td>" . htmlspecialchars($res['hours_worked']) . "</td>";
             // add current $res value to table: hours_worked, with special characters escaped

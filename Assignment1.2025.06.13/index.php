@@ -50,10 +50,10 @@
                 </div>
 
                 <div id="form-box-two">
-                    <label for="week">Date:</label>
-                    <input type="text" id="week" name="week">
+                    <label for="week">Week Worked:</label>
+                    <input type="date" id="week" name="week">
 
-                    <label for="hours">Hours:</label>
+                    <label for="hours">Hours Worked:</label>
                     <input type="text" id="hours" name="hours" placeholder="Please enter the hours worked.">
                 </div>
 
