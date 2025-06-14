@@ -5,10 +5,11 @@
     padding-bottom: 5rem;
     height: 100vh;
     display: flex;
+    /* padding for space between header/footer and the rest of the page, since header/footer are fixed */
 }
 
 .main-box-one,
-.main-box-three {
+.main-box-three { /* 30% for left and right boxes; 39% for middle box */
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 30%;
@@ -23,6 +24,7 @@
 .main-box-one,
 .main-box-two,
 .main-box-three {
+    /* generally try to keep everything centered */
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -68,6 +70,7 @@
 
 #index-form label {
     text-align: left;
+    /* stop labels from centering in form */
     width: 100%;
 }
 
@@ -85,6 +88,7 @@
 #index-form input[type="text"],
 #index-form input[type="week"],
 #index-form input[type="submit"] {
+    /* make sure input fields have adequate space/visibility */
     width: 90%;
     min-height: 3rem;
     padding: 0.5rem;

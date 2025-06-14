@@ -4,7 +4,7 @@
 class Database
 {
     private $host = 'YourHostIP';
-    private $user = 'YourUsername';
+    private $user = 'YourUserName';
     private $password = 'YourPassword';
     private $database = 'YourDatabaseName';
     protected $connection;

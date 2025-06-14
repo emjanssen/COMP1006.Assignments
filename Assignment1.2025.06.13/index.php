@@ -15,8 +15,11 @@
 <body>
 
 <header id="header-global"></header>
+<!--import with Javascript-->
 
 <main id="main-page-container">
+
+    <!--split main into three containers/boxes for flexbox layout -->
 
     <div class="main-box-one">
         <img src="css/images/box_one_skyline.png" alt="City Skyline">
@@ -36,6 +39,12 @@
     </div>
 
     <div class="main-box-three">
+
+        <!--section for employee hours input form
+        include labels for screen reader accessibility
+        use post for method due to sensitive data
+        give action add.php value as add.php handles the form's post logic
+        input type text for name, id, and hours worked; date type for week worked, as it provides a calendar to select the week from -->
 
         <section class="index-form" id="index-form">
             <form method="post" id="index-form-id" action="add.php">
@@ -59,6 +68,7 @@
 
                 <div id="form-box-three">
                     <input type="submit" name="submit" value="Submit">
+                    <!-- submit button to be targeted by add.php -->
                 </div>
 
             </form>
@@ -73,6 +83,7 @@
 </main>
 
 <footer id="footer-global"></footer>
+<!--import with Javascript-->
 
 </body>
 

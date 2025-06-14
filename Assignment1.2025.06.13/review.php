@@ -15,6 +15,7 @@
 <body>
 
 <header id="header-global"></header>
+<!--import with Javascript-->
 
 <main id="review-page-container">
 
@@ -59,6 +60,7 @@
 </main>
 
 <footer id="footer-global"></footer>
+<!--import with Javascript-->
 
 </body>
 

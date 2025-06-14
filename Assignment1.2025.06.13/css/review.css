@@ -3,6 +3,7 @@
 #review-page-container { /* ID for review class; contains everything except header and footer */
     padding-top: 5rem;
     padding-bottom: 5rem;
+    /* padding for space between header/footer and the rest of the page, since header/footer are fixed */
     height: 100vh;
     display: flex;
 }
