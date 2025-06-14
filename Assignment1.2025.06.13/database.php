@@ -3,10 +3,10 @@
 // purpose: database connection
 class Database
 {
-    private $host = 'YourHostIP';
-    private $user = 'YourUserName';
-    private $password = 'YourPassword';
-    private $database = 'YourDatabaseName';
+    private $host = '172.31.22.43';
+    private $user = 'Elizabeth200627709';
+    private $password = 'xYQKaXv-6K';
+    private $database = 'Elizabeth200627709';
     protected $connection;
     // protected variable to store our connection
     // can be accessed in this class and any subclasses
