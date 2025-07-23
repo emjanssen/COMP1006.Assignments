@@ -1,13 +1,13 @@
 <?php
+$pageTitle = 'Home';
+$pageDescription = 'Homepage.';
+$pageKeywords = 'home, landing page';
 require './templates/head.php';
 require './templates/header.php';
 ?>
+    <main>
 
-    <body>
-
-    </body>
-
-    </html>
+    </main>
 
 <?php
 require './templates/footer.php';

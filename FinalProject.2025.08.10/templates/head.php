@@ -12,3 +12,4 @@
     <link rel="icon" href="" type="image/x-icon">
     <title><?php echo htmlspecialchars($pageTitle ?? 'Default Title'); ?></title>
 </head>
+<body>
