@@ -4,11 +4,28 @@
     box-sizing: border-box;
 }
 
+/* default body, main, header, footer */
+
 body {
     background: #b4afc0;
 }
 
-header {
+main {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 1rem;
+}
+
+main div {
+    border: 1px solid red;
+}
+
+
+
+ header {
     position: fixed;
     top: 0;
     left: 0;
@@ -26,6 +43,8 @@ footer {
     width: 100%;
 }
 
+/* nav */
+
 #nav {
     display: flex;
     justify-content: space-between;
@@ -41,5 +60,3 @@ footer {
     margin: 1em;
     font-size: 1em;
 }
-
-
