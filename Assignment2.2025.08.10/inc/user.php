@@ -13,8 +13,8 @@ class User
     /* constructor that receives a database connection, and assigns it to user class' $connection variable
     database connection is established in login.php, as per below:
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $db = (new Database())->getConnection();
-        $user = new User($db);
+        $databaseConnection = (new Database())->getConnection();
+        $user = new User($databaseConnection);
     */
 
     /* - - - Constructor - - - */
