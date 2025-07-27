@@ -1,4 +1,5 @@
 <?php
+// Note: leaving detailed comments in because I find them useful for learning; would remove them from real life production code
 
 // user class to manage user-related functions
 class User
@@ -61,5 +62,99 @@ class User
         */
         return $doesUserExistSQLStatement->fetch(PDO::FETCH_ASSOC) !== false;
     }
+
+    public function registerUser($username, $password)
+    {
+        // check if username already exists; call the userExists() function to validate
+        if ($this->userExists($username)) {
+            // user already exists; return false
+            return false;
+        }
+
+        // hash password using SHA-512
+        $hash = hash('sha512', $password);
+
+        // sql query to insert new user into table
+        $sqlInsertNewUser = "INSERT INTO {$this->databaseTable} (username, password) VALUES (:username, :password)";
+
+        // prepare insert query
+        $sqlInsertNewUserStatement = $this->connection->prepare($sqlInsertNewUser);
+
+        // execute query with username and hashed password
+        $sqlInsertNewUserStatement->execute([':username' => $username, ':password' => $hash]);
+
+        // return true to indicate successful registration
+        return true;
+    }
+
+    public function loginUser($username, $password)
+    {
+        // hash password using SHA-512 for comparison
+        $hash = hash('sha512', $password);
+
+        // SQL query to select user that matches the provided credentials
+        $sqlSelectUserForLogin = "SELECT * FROM {$this->databaseTable} WHERE username = :username AND password = :password";
+
+        // prepare SQL query
+        $sqlSelectUserForLoginStatement = $this->connection->prepare($sqlSelectUserForLogin);
+
+        // execute query with username and hashed password
+        $sqlSelectUserForLoginStatement->execute([':username' => $username, ':password' => $hash]);
+
+        // fetch and return user data if credentials are correct; return false if not
+        return $sqlSelectUserForLoginStatement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllUsers()
+    {
+
+        // execute query to fetch all users from the table
+        $getAllUsersStatement = $this->connection->query("SELECT * FROM {$this->databaseTable}");
+
+        // return result as array of associative arrays
+        return $getAllUsersStatement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findUser($id)
+    {
+        // SQL query to fetch user data by ID
+        $sqlFindUser = "SELECT * FROM {$this->databaseTable} WHERE id = :id";
+
+        // prepare SQL query
+        $sqlFindUserStatement = $this->connection->prepare($sqlFindUser);
+
+        // execute query using the passed-in ID parameter
+        $sqlFindUserStatement->execute([':id' => $id]);
+
+        // fetch and return user data
+        return $sqlFindUserStatement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /* To-Do: refactor this function to permit updates to all possible user entries, not just username; name, email, photo, etc
+    need to also make sure that user can delete data */
+    public function updateUser($id, $username)
+    {
+        // SQL query to update username based on user ID
+        $sqlUpdateUsername = "UPDATE {$this->databaseTable} SET username = :username WHERE id = :id";
+
+        // Prepare the SQL query
+        $sqlUpdateUsernameStatement = $this->connection->prepare($sqlUpdateUsername);
+
+        // Execute the update with new username and ID
+        return $sqlUpdateUsernameStatement->execute([':username' => $username, ':id' => $id]);
+    }
+
+    public function deleteUser($id)
+    {
+        // SQL query to delete user by ID
+        $sqlDeleteUserByID = "DELETE FROM {$this->databaseTable} WHERE id = :id";
+
+        // Prepare the SQL query
+        $sqlDeleteUserByIDStatement = $this->connection->prepare($sqlDeleteUserByID);
+
+        // Execute the deletion using the given ID
+        return $sqlDeleteUserByIDStatement->execute([':id' => $id]);
+    }
 }
+
 ?>
