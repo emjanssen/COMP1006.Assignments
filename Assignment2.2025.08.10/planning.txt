@@ -1,0 +1,49 @@
+Templates:
+
+// global head file
+head.php
+// global header file
+header.php
+// global footer file
+footer.php
+
+Include:
+
+//database class to handle connection logic
+db.php
+
+//user class to manage user authentication and user-related operations/functions
+user.php
+//functions required:
+1. exists()
+2. register()
+3. login()
+4. getAll()
+5. update()
+6. delete()
+7. find()
+
+Main files (i.e. website pages):
+
++ Accessible without login:
+- Home.php
+- Login.php
+- Register.php
++ Accessible only when logged in:
+- Dashboard.php
+- Update.php
+
+Used        	Function	    Purpose
+* Login.php	    login()	        Authenticate user and start session
+        	    exists()	    Check if user exists before attempting login
+
+* Register.php	exists()	    Prevent duplicate registrations
+            	register()	    Create new user accounts
+
+# Dashboard.php	getAll()	    Display list of users
+
+# Update.php    find()	        Load current user data
+        	    update()	    Modify user data (inculding uploading a photo)
+                delete()	    Delete user
+
+* Public | # Private
