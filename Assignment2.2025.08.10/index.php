@@ -5,10 +5,13 @@ $pageKeywords = 'home, landing page';
 require './templates/head.php';
 require './templates/header.php';
 ?>
-    <main>
+    <main id="index-main">
+        <p>Welcome to [organization name]</p>
 
+        <section id="index-main-links">
 
-
+            <a href="login.php">Login</a>
+            <a href="register.php">Create User</a>
 
     </main>
 
