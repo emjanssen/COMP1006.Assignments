@@ -17,9 +17,11 @@
         <div id="header-global-grid-col-three">
             <nav id="header-nav">
                 <ul id="header-navigation-ul">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="register.php">Register</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><a href="index.php">Home</a></li>           <!-- public -->
+                    <li><a href="login.php">Login</a></li>          <!-- public -->
+                    <li><a href="register.php">Register</a></li>    <!-- public -->
+                    <li><a href="profile.php">Profile</a></li>      <!-- private -->
+                    <li><a href="dashboard.php">Dashboard</a></li>  <!-- private -->
                 </ul>
             </nav>
         </div>

@@ -1,9 +1,13 @@
 <?php
+// page metadata
 $pageTitle = 'Home';
 $pageDescription = "This is the homepage.";
 $pageKeywords = 'home, landing page';
+
+// required files
 require './templates/head.php';
 require './templates/header.php';
+
 ?>
     <main>
         <div id="main-index">

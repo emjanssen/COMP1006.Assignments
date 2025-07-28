@@ -1,8 +1,8 @@
 <?php
 // page metadata
-$pageTitle = 'Dashboard';
-$pageDescription = "This is the dashboard page.";
-$pageKeywords = 'dashboard';
+$pageTitle = 'Profile';
+$pageDescription = "This is the profile page.";
+$pageKeywords = 'profile';
 
 // required files
 require './templates/head.php';
@@ -10,8 +10,9 @@ require './templates/header.php';
 require './inc/database.php';
 require './inc/user.php';
 ?>
+
     <main>
-        <div id="main-dashboard">
+        <div id="main-register">
 
         </div>
     </main>
