@@ -1,5 +1,141 @@
+/* - - - Universal - - - */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* - - - Body - - - */
+
+body {
+    background: lightgray;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-areas:
+    "global-header"
+    "main"
+    "global-footer";
+    height: 100vh;
+}
+
+ul {
+    list-style: none;
+}
+
+h1 {
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* - - - Main - - - */
+
+main {
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-index,
+#main-login,
+#main-register {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    text-align: center;
+}
+
+#index-main-links {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+/* - - - Header - - */
+
+#global-header {
+    background: aliceblue;
+    grid-area: global-header;
+}
+
+
+#header-global-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+
+#header-global-grid-col-one,
+#header-global-grid-col-two,
+#header-global-grid-col-three {
+    display: flex;
+}
+
+#header-global-grid-col-one {
+    justify-content: start;
+    align-items: center;
+}
+
+#header-global-grid-col-two {
+    justify-content: center;
+}
+
+#header-global-grid-col-three {
+    justify-content: end;
+}
+
+#header-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#header-navigation-ul {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#img-logo {
+    padding-left: 1rem;
+    padding-top: .75rem;
+    height: 4em;
+    width: auto;
+}
+
+/*  - - - Footer - - - */
+
+#global-footer {
+    background: aliceblue;
+    grid-area: global-footer;
+}
+
+#footer-global-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+}
+
+#footer-global-grid-col-one {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* - - - Media Queries - - - */
+
+@media (max-width: 800px) {
+    body {
+        grid-template-rows: 20% 60% 20%;
+    }
 }

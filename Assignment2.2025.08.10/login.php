@@ -77,44 +77,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
 
-    <?php
-    // if our error message value is not empty
-    if (!empty($error)) {
-        // we use echo to print an error message
-        // using paragraph style to print the error message in red
-        // call htmlspecialchars on our $error value to convert any special chars (ex: <, >, &, and ") to html entities
-        // examples: < becomes &lt;, > becomes &gt;, & becomes &amp;, " becomes &quot;
-        // htmlspecialchars is used to prevent user input from being automatically interpreted as html; security measure against HTML injection
-        echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
-    }
-    ?>
+    <div id="main-login">
+        <h2>Please log in.</h2>
 
-    <!-- login form; action calls our login.php file; i.e. the code defined above -->
-    <form method="POST" action="login.php">
+        <?php
+        // if our error message value is not empty
+        if (!empty($error)) {
+            // we use echo to print an error message
+            // using paragraph style to print the error message in red
+            // call htmlspecialchars on our $error value to convert any special chars (ex: <, >, &, and ") to html entities
+            // examples: < becomes &lt;, > becomes &gt;, & becomes &amp;, " becomes &quot;
+            // htmlspecialchars is used to prevent user input from being automatically interpreted as html; security measure against HTML injection
+            echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
+        }
+        ?>
 
-        <!-- fields for username and password; both are required -->
-        <div>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required>
-        </div>
+        <!-- login form; action calls our login.php file; i.e. the code defined above -->
+        <form method="POST" action="login.php">
 
-        <br>
+            <!-- fields for username and password; both are required -->
+            <div>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required>
+            </div>
 
-        <div>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required>
-        </div>
+            <br>
 
-        <br>
-        <!-- Explanation of how button type = submit works, and how it links to post action and login.php
-        when we click <button type="submit">Login</button>, browser collects the form data, and submits it to the URL in the form’s action attribute; i.e. login.php
-        server-side, PHP code in login.php checks if request method is POST, and then processes the data that's been submitted
-        ergo, button itself doesn’t specify POST or URL, it just triggers form submission;  method and action attributes control how/where the form data goes -->
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
 
+            <br>
+            <!-- Explanation of how button type = submit works, and how it links to post action and login.php
+            when we click <button type="submit">Login</button>, browser collects the form data, and submits it to the URL in the form’s action attribute; i.e. login.php
+            server-side, PHP code in login.php checks if request method is POST, and then processes the data that's been submitted
+            ergo, button itself doesn’t specify POST or URL, it just triggers form submission;  method and action attributes control how/where the form data goes -->
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
 </main>
 <?php
 // Include the footer template

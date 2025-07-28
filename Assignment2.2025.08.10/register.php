@@ -74,29 +74,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     ?>
 
-    <!-- registration form -->
-    <form method="POST" action="register.php">
+    <div id="main-register">
+        <h2>Please create an account.</h2>
 
-        <div>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <br>
-        <div>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <br>
-        <div>
-            <label for="confirmPassword">Confirm Password:</label><br>
-            <input type="password" id="confirmPassword" name="confirmPassword" required>
-        </div>
-        <br>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
+        <!-- registration form -->
+        <form method="POST" action="register.php">
 
+            <div>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <br>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <br>
+            <div>
+                <label for="confirmPassword">Confirm Password:</label><br>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <br>
+            <div>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
 </main>
 
 <?php
