@@ -1,4 +1,7 @@
 <?php
+// start session
+session_start();
+
 // page metadata
 $pageTitle = 'Your Profile';
 $pageDescription = "Manage your account details here.";
@@ -10,11 +13,10 @@ require './templates/header.php';
 require './inc/database.php';
 require './inc/user.php';
 
-// start session
-session_start();
-
 // check if user is logged in; otherwise, deny access
 if (!isset($_SESSION['user_id'])) {
+    // run footer code if user isn't logged in; otherwise, it doesn't show at all, because die() terminates the script early
+    require './templates/footer.php';
     die("Access denied. Please log in.");
 }
 
@@ -73,21 +75,14 @@ $currentUser = $user->findUser($userId);
             <form method="POST" action="profile.php">
                 <div>
                     <label for="username">Username:</label><br>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value="<?php echo htmlspecialchars($currentUser['username']); ?>"
-                        required
-                    >
+                    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($currentUser['username']); ?>" required>
                 </div>
-
                 <br>
-
                 <div>
                     <button type="submit">Update Username</button>
                 </div>
             </form>
+
         <?php else: ?>
             <p>User not found.</p>
         <?php endif; ?>
@@ -95,5 +90,6 @@ $currentUser = $user->findUser($userId);
 </main>
 
 <?php
+// run footer code here if the user was logged in properly when they loaded the page
 require './templates/footer.php';
 ?>

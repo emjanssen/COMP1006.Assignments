@@ -1,4 +1,8 @@
 <?php
+
+// use built-in function to begin session so we can manage login state
+session_start();
+
 // page metadata
 $pageTitle = 'Login';
 $pageDescription = "This is the login page.";
@@ -9,9 +13,6 @@ require './templates/head.php';
 require './templates/header.php';
 require './inc/database.php';
 require './inc/user.php';
-
-// use built-in function to begin session so we can manage login state
-session_start();
 
 // initialize variable for storing error message
 $error = "";
