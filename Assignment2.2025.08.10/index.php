@@ -12,7 +12,7 @@ require './templates/header.php';
         <section id="index-main-links">
 
             <h3><a href="login.php">Login</a></h3>
-            <h3><a href="register.php">Create User</a></h3>
+            <h3><a href="register.php">Register</a></h3>
         </div>
     </main>
 
