@@ -7,6 +7,7 @@ $pageKeywords = 'dashboard';
 // required files
 require './templates/head.php';
 require './templates/header.php';
+require './templates/footer.php';
 require './inc/database.php';
 require './inc/user.php';
 ?>
@@ -15,7 +16,3 @@ require './inc/user.php';
 
         </div>
     </main>
-
-<?php
-require './templates/footer.php';
-?>

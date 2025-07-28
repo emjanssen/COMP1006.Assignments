@@ -103,7 +103,7 @@ main {
 #header-navigation-ul {
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 #img-logo {

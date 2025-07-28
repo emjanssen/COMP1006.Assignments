@@ -7,6 +7,7 @@ $pageKeywords = 'register, signup';
 // required files
 require './templates/head.php';
 require './templates/header.php';
+require './templates/footer.php';
 require './inc/database.php';
 require './inc/user.php';
 
@@ -101,8 +102,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </main>
-
-<?php
-// Include footer template
-require './templates/footer.php';
-?>

@@ -7,6 +7,8 @@ $pageKeywords = 'home, landing page';
 // required files
 require './templates/head.php';
 require './templates/header.php';
+require './templates/footer.php';
+?>
 
 ?>
     <main>
@@ -19,7 +21,3 @@ require './templates/header.php';
             <h3><a href="register.php">Register</a></h3>
         </div>
     </main>
-
-<?php
-require './templates/footer.php';
-?>
