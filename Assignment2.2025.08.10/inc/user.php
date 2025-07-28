@@ -130,20 +130,6 @@ class User
         return $sqlFindUserStatement->fetch(PDO::FETCH_ASSOC);
     }
 
-    /* To-Do: refactor this function to permit updates to all possible user entries, not just username; name, email, photo, etc
-    need to also make sure that user can delete data */
-    public function updateUser($id, $username)
-    {
-        // SQL query to update username based on user ID
-        $sqlUpdateUsername = "UPDATE {$this->databaseTable} SET username = :username WHERE id = :id";
-
-        // Prepare the SQL query
-        $sqlUpdateUsernameStatement = $this->connection->prepare($sqlUpdateUsername);
-
-        // Execute the update with new username and ID
-        return $sqlUpdateUsernameStatement->execute([':username' => $username, ':id' => $id]);
-    }
-
     public function deleteUser($id)
     {
         // SQL query to delete user by ID
@@ -154,6 +140,24 @@ class User
 
         // Execute the deletion using the given ID
         return $sqlDeleteUserByIDStatement->execute([':id' => $id]);
+    }
+
+    // - - - Update User Data Functions - - - //
+
+    // plan for future: refactor so we have one function to update a variety of user date
+    // for now, start simple, and make one function for each option for user data update
+    // going to just stick with username until the rest of the site is functional
+
+    public function updateUsername($id, $username)
+    {
+        // SQL query to update username based on user ID
+        $sqlUpdateUsername = "UPDATE {$this->databaseTable} SET username = :username WHERE id = :id";
+
+        // Prepare the SQL query
+        $sqlUpdateUsernameStatement = $this->connection->prepare($sqlUpdateUsername);
+
+        // Execute the update with new username and ID
+        return $sqlUpdateUsernameStatement->execute([':username' => $username, ':id' => $id]);
     }
 }
 
