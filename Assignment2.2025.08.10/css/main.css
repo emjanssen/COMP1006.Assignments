@@ -53,6 +53,7 @@ main {
     flex-direction: column;
     gap: 3rem;
     text-align: center;
+    max-width: 80%;
 }
 
 #index-main-links {

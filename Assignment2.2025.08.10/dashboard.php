@@ -1,18 +1,30 @@
 <?php
 // page metadata
-$pageTitle = 'Dashboard';
-$pageDescription = "This is the dashboard page.";
-$pageKeywords = 'dashboard';
+$pageTitle = 'Your Profile';
+$pageDescription = "Manage your account details here.";
+$pageKeywords = 'profile, user, settings';
 
-// required files
+// include necessary templates and classes
 require './templates/head.php';
 require './templates/header.php';
-require './templates/footer.php';
 require './inc/database.php';
 require './inc/user.php';
+
+// start session
+session_start();
+
+// check if user is logged in; otherwise, deny access
+if (!isset($_SESSION['user_id'])) {
+    die("Access denied. Please log in.");
+}
 ?>
-    <main>
+
+<main>
         <div id="main-dashboard">
 
         </div>
-    </main>
+</main>
+
+<?php
+require './templates/footer.php';
+?>

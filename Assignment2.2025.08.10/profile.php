@@ -9,7 +9,6 @@ require './templates/head.php';
 require './templates/header.php';
 require './inc/database.php';
 require './inc/user.php';
-require './templates/footer.php';
 
 // start session
 session_start();
@@ -94,3 +93,7 @@ $currentUser = $user->findUser($userId);
         <?php endif; ?>
     </div>
 </main>
+
+<?php
+require './templates/footer.php';
+?>
