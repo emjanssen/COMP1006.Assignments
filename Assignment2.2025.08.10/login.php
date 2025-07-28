@@ -77,8 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
 
-    <h1>Login</h1>
-
     <?php
     // if our error message value is not empty
     if (!empty($error)) {
