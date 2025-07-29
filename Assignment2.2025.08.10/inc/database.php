@@ -1,4 +1,5 @@
 <?php
+// Note: leaving detailed comments in because I find them useful for learning; would remove them from real life production code
 
 // database class to manage the database connection
 class Database
