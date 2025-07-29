@@ -48,18 +48,30 @@ main {
 
 #main-index,
 #main-login,
-#main-register {
+#main-register,
+#main-profile {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: .5rem;
     text-align: center;
-    max-width: 80%;
+    max-width: 90%;
 }
 
 #index-main-links {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#profile-current-user-date p,
+#profile-form-update-instructions p {
+    margin: .5rem;
+}
+
+button {
+    padding: .1em;
+    margin: .5rem;
 }
 
 /* - - - Header - - */

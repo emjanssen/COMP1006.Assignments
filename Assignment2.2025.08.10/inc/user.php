@@ -149,9 +149,9 @@ class User
 
     // - - - Update User Data Functions - - - //
 
-    // plan for future: refactor so we have one function to update a variety of user date
+    // plan for future: refactor so we have one function to update a variety of user data
     // for now, start simple, and make one function for each option for user data update
-    // going to just stick with username until the rest of the site is functional
+    // not going to comment each function, as the process is essentially the same
 
     public function updateUsername($id, $username)
     {
@@ -164,6 +164,28 @@ class User
         // Execute the update with new username and ID
         return $sqlUpdateUsernameStatement->execute([':username' => $username, ':id' => $id]);
     }
+
+    public function updateFirstName($id, $firstName)
+    {
+        $sqlUpdateFirstName = "UPDATE {$this->databaseTable} SET first_name = :first_name WHERE id = :id";
+        $sqlUpdateFirstNameStatement = $this->connection->prepare($sqlUpdateFirstName);
+        return $sqlUpdateFirstNameStatement->execute([':first_name' => $firstName, ':id' => $id]);
+    }
+
+    public function updateLastName($id, $lastName)
+    {
+        $sqlUpdateLastName = "UPDATE {$this->databaseTable} SET last_name = :last_name WHERE id = :id";
+        $sqlUpdateLastNameStatement = $this->connection->prepare($sqlUpdateLastName);
+        return $sqlUpdateLastNameStatement->execute([':last_name' => $lastName, ':id' => $id]);
+    }
+
+    public function updateEmail($id, $email)
+    {
+        $sqlUpdateEmail = "UPDATE {$this->databaseTable} SET email_address = :email_address WHERE id = :id";
+        $sqlUpdateEmailStatement = $this->connection->prepare($sqlUpdateEmail);
+        return $sqlUpdateEmailStatement->execute([':email_address' => $email, ':id' => $id]);
+    }
+
 }
 
 ?>

@@ -74,6 +74,12 @@ $currentUser = $user->findUser($userId);
 
 /* - - - Form Functions - - - */
 
+// in-future, will refactor update code into one function, instead of repeating myself
+// for now, leaving everything separate to keep everything a bit easier to learn/manage
+// not going to comment each update function because the process is essentially the same for each
+// in-future, also want to update user class to have an emailExists() method to check if the email is still in use
+// and need to include validation for first and last name inputs as well (not just whitespace, contains letter chars, etc.)
+
 // form submission to update username
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     $newUsername = trim($_POST['username']);
@@ -105,9 +111,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
         $error = "Username cannot be empty.";
     }
 }
+
+
+// form submission to update first name
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['first_name'])) {
+    $newFirstName = trim($_POST['first_name']);
+
+    if (!empty($newFirstName)) {
+        $updateSuccess = $user->updateFirstName($userId, $newFirstName);
+        if ($updateSuccess) {
+            $success = "First name updated successfully.";
+        } else {
+            $error = "Failed to update first name. Please try again.";
+        }
+    } else {
+        $error = "First name cannot be empty.";
+    }
+}
+
+// form submission to update last name
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['last_name'])) {
+    $newLastName = trim($_POST['last_name']);
+
+    if (!empty($newLastName)) {
+        $updateSuccess = $user->updateLastName($userId, $newLastName);
+        if ($updateSuccess) {
+            $success = "Last name updated successfully.";
+        } else {
+            $error = "Failed to update last name. Please try again.";
+        }
+    } else {
+        $error = "Last name cannot be empty.";
+    }
+}
+
+
+// form submission to update email address
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
+    $newEmail = trim($_POST['email_address']);
+
+    if (!empty($newEmail)) {
+        // using filter_var() for email validation; built-in PHP function that's used to validate data
+        // its inputs are the value being validated (i.e. the email address, and the type of filter)
+        // in this case, FILTER_VALIDATE_EMAIL checks where the input is a properly formed email address
+        // if the validation returns true, then we move on to trying to update the email address
+        if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+            $updateSuccess = $user->updateEmail($userId, $newEmail);
+            if ($updateSuccess) {
+                $success = "Email address updated successfully.";
+            } else {
+                $error = "Failed to update email address. Please try again.";
+            }
+            // if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) returned false, it's not a valid, and we assign an error message value
+        } else {
+            $error = "Please enter a valid email address.";
+        }
+    } else {
+        $error = "Email address cannot be empty.";
+    }
+}
+
+
 ?>
 
+    <!-- - - - Forms for Updating Data - - - -->
+
     <main>
+        <div id="main-profile">
         <div id="main-profile">
             <h2>Your Profile</h2>
             <br>
@@ -130,29 +200,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
              if it didn't return a valid record, $currentUser will have a value of false or null
              -->
             <?php if ($currentUser): ?>
-                <!-- form action linked to profile.php code -->
+
+                <div id="profile-current-user-date">
+                    <!-- echo out the current user data values -->
+                    <p>Username: <?php echo htmlspecialchars($currentUser['username']); ?></p>
+                    <p>First name: <?php echo htmlspecialchars($currentUser['first_name']); ?></p>
+                    <p>Last name: <?php echo htmlspecialchars($currentUser['last_name']); ?></p>
+                    <p>Email address: <?php echo htmlspecialchars($currentUser['email_address']); ?></p>
+                </div>
+
+            <div id="profile-form-update-instructions">
+                <p>The fields below show your current user date.
+                <p>You may update your username, first name, last name, or password.</p>
+                <p>Please update each piece of data individually.</p>
+            </div>
+
+                <!-- forms for updating user data; each form action is linked to profile.php code -->
+
+                <!-- in-future, will refactor this all into one form; for now, i just wanted to learn the basics of updating user data -->
+
+                <!-- update username -->
                 <form method="POST" action="profile.php">
-                    Username: <?php echo htmlspecialchars($currentUser['username']); ?>
-                    <br>
-                    <br>
-                    First name: <?php echo htmlspecialchars($currentUser['first_name']); ?>
-                    <br>
-                    <br>
-                    Last name: <?php echo htmlspecialchars($currentUser['last_name']); ?>
-                    <br>
-                    <br>
-                    Email address: <?php echo htmlspecialchars($currentUser['email_address']); ?>
-                    <br>
-                    <br>
                     <div>
-                        <label for="username">To update your username, please enter the new username here: </label>
-                        <br>
-                        <br>
-                        <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($currentUser['username']); ?>" />
+                        <label for="username">Please enter your new username here: </label>
+                        <input type="text" id="username" name="username"
+                               value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
                     </div>
-                    <br>
                     <div>
                         <button type="submit">Update Username</button>
+                    </div>
+                </form>
+
+                <!-- update first name -->
+                <form method="POST" action="profile.php">
+                    <div>
+                        <label for="first_name">Please enter your new first name here: </label>
+                        <input type="text" id="first_name" name="first_name"
+                               value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
+                    </div>
+                    <div>
+                        <button type="submit">Update First Name</button>
+                    </div>
+                </form>
+
+                <!-- update last name -->
+                <form method="POST" action="profile.php">
+                    <div>
+                        <label for="last_name">Please enter your new last name here: </label>
+                        <input type="text" id="last_name" name="last_name"
+                               value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
+                    </div>
+                    <div>
+                        <button type="submit">Update Last Name</button>
+                    </div>
+                </form>
+
+                <!-- update email -->
+                <form method="POST" action="profile.php">
+                    <div>
+                        <label for="email_address">Please enter your new email address here: </label>
+                        <input type="email" id="email_address" name="email_address"
+                               value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
+                    </div>
+                    <div>
+                        <button type="submit">Update Email</button>
                     </div>
                 </form>
 
@@ -160,6 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
             <?php else: ?>
                 <p>User not found.</p>
             <?php endif; ?>
+        </div>
         </div>
     </main>
 
