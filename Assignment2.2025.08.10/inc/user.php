@@ -63,7 +63,7 @@ class User
         return $doesUserExistSQLStatement->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
-    public function registerUser($username, $password)
+    public function registerUser($username, $password, $firstName, $lastName, $email)
     {
         // check if username already exists; call the userExists() function to validate
         if ($this->userExists($username)) {
@@ -75,16 +75,21 @@ class User
         $hash = hash('sha512', $password);
 
         // sql query to insert new user into table
-        $sqlInsertNewUser = "INSERT INTO {$this->databaseTable} (username, password) VALUES (:username, :password)";
+        $sqlInsertNewUser = "INSERT INTO {$this->databaseTable} (username, first_name, last_name, email, password)
+            VALUES (:username, :first_name, :last_name, :email, :password)";
 
         // prepare insert query
         $sqlInsertNewUserStatement = $this->connection->prepare($sqlInsertNewUser);
 
         // execute query with username and hashed password
-        $sqlInsertNewUserStatement->execute([':username' => $username, ':password' => $hash]);
-
-        // return true to indicate successful registration
-        return true;
+        // return the result of execute(); if the insert fails, false is returned
+        return $sqlInsertNewUserStatement->execute([
+            ':username'    => $username,
+            ':first_name'  => $firstName,
+            ':last_name'   => $lastName,
+            ':email'       => $email,
+            ':password'    => $hash,
+        ]);
     }
 
     public function loginUser($username, $password)

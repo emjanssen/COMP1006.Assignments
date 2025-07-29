@@ -24,6 +24,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = '';
     }
 
+    // if first name was entered, retrieve form input values (with default fallback)
+    if (isset($_POST['first_name'])) {
+        // clean first name with trim() to remove whitespace (and a few other specific characters)
+        $firstName = trim($_POST['first_name']);
+    } else {
+        $firstName = '';
+    }
+
+    // if first name was entered, retrieve form input values (with default fallback)
+    if (isset($_POST['last_name'])) {
+        // clean last name with trim() to remove whitespace (and a few other specific characters)
+        $lastName = trim($_POST['last_name']);
+    } else {
+        $lastName = '';
+    }
+
+    // if email was entered, retrieve form input values (with default fallback)
+    if (isset($_POST['email'])) {
+        // clean email with trim() to remove whitespace (and a few other specific characters)
+        $email = trim($_POST['email']);
+    } else {
+        $email = '';
+    }
+
     // if password was entered, retrieve form input values (with default fallback)
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
@@ -54,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         we call registerUser() from our user class object, and pass in the username and password values
         if this works properly, we redirected user to login page, so they can log in with their newly created credentials
         */
-        if ($user->registerUser($username, $password)) {
+        if ($user->registerUser($username, $firstName, $lastName, $email, $password)) {
             header('Location: login.php');
             exit;
         } else {
@@ -65,42 +89,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main>
-    <!-- registration form is basically the same set-up/process as form in login.php; not going to comment everything again -->
+    <main>
+        <!-- registration form is basically the same set-up/process as form in login.php; not going to comment everything again -->
 
-    <?php
-    if (!empty($error)) {
-        echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
-    }
-    ?>
+        <?php
+        if (!empty($error)) {
+            echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
+        }
+        ?>
 
-    <div id="main-register">
-        <h2>Please create an account.</h2>
+        <div id="main-register">
+            <h2>Please create an account.</h2>
 
-        <!-- registration form -->
-        <form method="POST" action="register.php">
+            <!-- registration form -->
+            <form method="POST" action="register.php">
 
-            <div>
-                <label for="username">Username:</label><br>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <br>
-            <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <br>
-            <div>
-                <label for="confirmPassword">Confirm Password:</label><br>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <br>
-            <div>
-                <button type="submit">Register</button>
-            </div>
-        </form>
-    </div>
-</main>
+                <div>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <br>
+                <div>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <br>
+                <div>
+                    <label for="confirmPassword">Confirm Password:</label><br>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <br>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </main>
 
 <?php
 require './templates/footer.php';
