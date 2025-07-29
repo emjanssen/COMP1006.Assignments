@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $loginResult['id'];
         $_SESSION['username'] = $loginResult['username'];
 
-        // and we redirect the user to the dashboard (in-future, would probably make a user profile page to redirect to from successful login)
-        header('Location: dashboard.php');
+        // and we redirect the user to their user profile
+        header('Location: profile.php');
         exit;
 
     } else {

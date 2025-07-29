@@ -21,7 +21,6 @@
                     <li><a href="login.php">Login</a></li>          <!-- public -->
                     <li><a href="register.php">Register</a></li>    <!-- public -->
                     <li><a href="profile.php">Profile</a></li>      <!-- private -->
-                    <li><a href="dashboard.php">Dashboard</a></li>  <!-- private -->
                 </ul>
             </nav>
         </div>

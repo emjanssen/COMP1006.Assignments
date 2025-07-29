@@ -6,7 +6,7 @@
 session_start();
 
 // page metadata
-$pageTitle = 'Your Profile';
+$pageTitle = 'Profile';
 $pageDescription = "Manage your account details here.";
 $pageKeywords = 'profile, user, settings';
 
@@ -39,7 +39,7 @@ these values are saved on the server, and linked to the user's session cookie
 even after login.php script finishes, these session values persist as long as the session is active (until we close the browser, or logout, or the session expires, etc.)
 so we have access to $_SESSION['user_id'] and $_SESSION['username'] even though login.php has finished executing its code
 
-2. When we redirect user to dashboard.php upon successful login:
+2. When we redirect user to login.php upon successful login:
     // first we start the same session again/resume the existing session
     session_start();
 
@@ -49,7 +49,7 @@ so we have access to $_SESSION['user_id'] and $_SESSION['username'] even though 
     die("Access denied");
     }
 
-3. We recreate Database and User objects in dashboard.php:
+3. We recreate Database and User objects in profile.php:
     $database = new Database();
     $databaseConnection = $database->getDatabaseConnection();
     $user = new User($databaseConnection);
