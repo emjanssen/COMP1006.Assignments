@@ -84,7 +84,7 @@ button {
 /* - - - Header - - */
 
 #global-header {
-    background: linear-gradient(to right, #F0F8FF, #D3D3D3);
+    background: linear-gradient(to bottom, #D6D8DB, #F1F3F5);
     grid-area: global-header;
 }
 
@@ -139,7 +139,8 @@ button {
 /*  - - - Footer - - - */
 
 #global-footer {
-    background: linear-gradient(to right, #D3D3D3, #F0F8FF);
+    background: linear-gradient(to left, #F1F3F5, #D6D8DB);
+    box-shadow: 0px 0px 2px #D3D3D3;
     grid-area: global-footer;
 }
 
