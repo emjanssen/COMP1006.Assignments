@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // if email was entered, retrieve form input values (with default fallback)
-    if (isset($_POST['email'])) {
+    if (isset($_POST['email_address'])) {
         // clean email with trim() to remove whitespace (and a few other specific characters)
-        $email = trim($_POST['email']);
+        $email = trim($_POST['email_address']);
     } else {
         $email = '';
     }
@@ -120,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <br>
                 <div>
-                    <label for="email">Email Address:</label><br>
-                    <input type="text" id="email" name="email" required>
+                    <label for="email_address">Email Address:</label><br>
+                    <input type="text" id="email_address" name="email_address" required>
                 </div>
                 <br>
                 <div>

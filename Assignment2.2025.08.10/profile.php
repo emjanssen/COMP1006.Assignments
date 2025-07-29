@@ -110,6 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     <main>
         <div id="main-profile">
             <h2>Your Profile</h2>
+            <br>
 
             <!-- if our success variable isn't empty -->
             <?php if (!empty($success)): ?>
@@ -131,11 +132,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
             <?php if ($currentUser): ?>
                 <!-- form action linked to profile.php code -->
                 <form method="POST" action="profile.php">
+                    Username: <?php echo htmlspecialchars($currentUser['username']); ?>
+                    <br>
+                    <br>
+                    First name: <?php echo htmlspecialchars($currentUser['first_name']); ?>
+                    <br>
+                    <br>
+                    Last name: <?php echo htmlspecialchars($currentUser['last_name']); ?>
+                    <br>
+                    <br>
+                    Email address: <?php echo htmlspecialchars($currentUser['email_address']); ?>
+                    <br>
+                    <br>
                     <div>
-                        <label for="username">Username:</label><br>
-                        <input type="text" id="username" name="username"
-                        <!-- the value of $currentUser will be echoed into form here -->
-                        value="<?php echo htmlspecialchars($currentUser['username']); ?>" required>
+                        <label for="username">To update your username, please enter the new username here: </label>
+                        <br>
+                        <br>
+                        <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($currentUser['username']); ?>" />
                     </div>
                     <br>
                     <div>

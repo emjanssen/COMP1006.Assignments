@@ -75,8 +75,8 @@ class User
         $hash = hash('sha512', $password);
 
         // sql query to insert new user into table
-        $sqlInsertNewUser = "INSERT INTO {$this->databaseTable} (username, first_name, last_name, email, password)
-            VALUES (:username, :first_name, :last_name, :email, :password)";
+        $sqlInsertNewUser = "INSERT INTO {$this->databaseTable} (username, first_name, last_name, email_address, password)
+            VALUES (:username, :first_name, :last_name, :email_address, :password)";
 
         // prepare insert query
         $sqlInsertNewUserStatement = $this->connection->prepare($sqlInsertNewUser);
@@ -84,11 +84,11 @@ class User
         // execute query with username and hashed password
         // return the result of execute(); if the insert fails, false is returned
         return $sqlInsertNewUserStatement->execute([
-            ':username'    => $username,
-            ':first_name'  => $firstName,
-            ':last_name'   => $lastName,
-            ':email'       => $email,
-            ':password'    => $hash,
+            ':username'         => $username,
+            ':first_name'       => $firstName,
+            ':last_name'        => $lastName,
+            ':email_address'    => $email,
+            ':password'         => $hash,
         ]);
     }
 
