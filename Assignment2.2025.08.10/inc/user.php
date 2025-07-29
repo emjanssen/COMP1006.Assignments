@@ -63,7 +63,7 @@ class User
         return $doesUserExistSQLStatement->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
-    public function registerUser($username, $password, $firstName, $lastName, $email)
+    public function registerUser($username, $firstName, $lastName, $email, $password)
     {
         // check if username already exists; call the userExists() function to validate
         if ($this->userExists($username)) {
