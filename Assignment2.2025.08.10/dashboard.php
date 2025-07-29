@@ -17,7 +17,7 @@ require './inc/user.php';
 if (!isset($_SESSION['user_id'])) {
     // run footer code if user isn't logged in; otherwise, it doesn't show at all, because die() terminates the script early
     require './templates/footer.php';
-    die("Access denied. Please log in.");
+    die("Access denied. Please login.");
 }
 ?>
 

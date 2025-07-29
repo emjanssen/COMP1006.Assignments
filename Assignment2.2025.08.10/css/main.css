@@ -69,11 +69,12 @@ main {
     grid-area: global-header;
 }
 
-
 #header-global-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
+    grid-template-areas:
+    "header-global-grid-col-one header-global-grid-col-two header-global-grid-col-three";
 }
 
 #header-global-grid-col-one,
@@ -83,15 +84,18 @@ main {
 }
 
 #header-global-grid-col-one {
+    grid-area: header-global-grid-col-one;
     justify-content: start;
     align-items: center;
 }
 
 #header-global-grid-col-two {
+    grid-area: header-global-grid-col-two;
     justify-content: center;
 }
 
 #header-global-grid-col-three {
+    grid-area: header-global-grid-col-three;
     justify-content: end;
 }
 
