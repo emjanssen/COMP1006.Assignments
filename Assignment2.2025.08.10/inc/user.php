@@ -110,6 +110,9 @@ class User
         return $sqlSelectUserForLoginStatement->fetch(PDO::FETCH_ASSOC);
     }
 
+    /* commenting out getAllUsers() because we won't be having a dashboard page for this assignment
+    keeping function for future reference
+
     public function getAllUsers()
     {
 
@@ -118,7 +121,10 @@ class User
 
         // return result as array of associative arrays
         return $getAllUsersStatement->fetchAll(PDO::FETCH_ASSOC);
-    }
+    }*/
+
+    /* commenting out findUser() because we won't be having a dashboard page for this assignment
+    keeping function for future reference
 
     public function findUser($id)
     {
@@ -133,7 +139,7 @@ class User
 
         // fetch and return user data
         return $sqlFindUserStatement->fetch(PDO::FETCH_ASSOC);
-    }
+    } */
 
     public function deleteUser($id)
     {

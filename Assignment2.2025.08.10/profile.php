@@ -178,7 +178,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
 
     <main>
         <div id="main-profile">
-        <div id="main-profile">
             <h2>Your Profile</h2>
             <br>
 
@@ -209,11 +208,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
                     <p>Email address: <?php echo htmlspecialchars($currentUser['email_address']); ?></p>
                 </div>
 
-            <div id="profile-form-update-instructions">
-                <p>The fields below show your current user date.
-                <p>You may update your username, first name, last name, or password.</p>
-                <p>Please update each piece of data individually.</p>
-            </div>
+                <div id="profile-form-update-instructions">
+                    <p>The fields below show your current user date.
+                    <p>You may update your username, first name, last name, or password.</p>
+                    <p>Please update each piece of data individually.</p>
+                </div>
 
                 <!-- forms for updating user data; each form action is linked to profile.php code -->
 
@@ -271,7 +270,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
             <?php else: ?>
                 <p>User not found.</p>
             <?php endif; ?>
-        </div>
         </div>
     </main>
 
