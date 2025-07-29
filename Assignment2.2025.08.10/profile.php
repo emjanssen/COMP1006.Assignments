@@ -266,6 +266,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
                     </div>
                 </form>
 
+                <!-- Delete User Function -->
+
+                <!-- form calls the delete.php file; delete.php in turn calls deleteUSer() from the user.php page -->
+                <!-- onsubmit pops up a notification asking for user to confirm delete -->
+                <form method="POST" action="delete.php" onsubmit="return confirm('Are you sure you would like to delete your account?');">
+                    <input type="hidden" name="delete_user"/>
+                    <button type="submit">Delete Your Account</button>
+                </form>
+
+                <!-- Logout Function -->
+
                 <!-- if $currentUser is false/null, we echo a user not found message -->
             <?php else: ?>
                 <p>User not found.</p>

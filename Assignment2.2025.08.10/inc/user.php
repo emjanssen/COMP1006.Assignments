@@ -84,11 +84,11 @@ class User
         // execute query with username and hashed password
         // return the result of execute(); if the insert fails, false is returned
         return $sqlInsertNewUserStatement->execute([
-            ':username'         => $username,
-            ':first_name'       => $firstName,
-            ':last_name'        => $lastName,
-            ':email_address'    => $email,
-            ':password'         => $hash,
+            ':username' => $username,
+            ':first_name' => $firstName,
+            ':last_name' => $lastName,
+            ':email_address' => $email,
+            ':password' => $hash,
         ]);
     }
 
@@ -141,7 +141,7 @@ class User
     public function deleteUser($id)
     {
         // SQL query to delete user by ID
-        $sqlDeleteUserByID = "DELETE FROM {$this->databaseTable} WHERE id = :id";
+       $sqlDeleteUserByID = "DELETE FROM {$this->databaseTable} WHERE id = :id";
 
         // Prepare the SQL query
         $sqlDeleteUserByIDStatement = $this->connection->prepare($sqlDeleteUserByID);
