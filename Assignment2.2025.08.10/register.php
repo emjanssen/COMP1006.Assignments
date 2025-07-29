@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 // page metadata
 $pageTitle = 'Register';
 $pageDescription = "This is the registration page.";
@@ -10,8 +13,19 @@ require './templates/header.php';
 require './inc/database.php';
 require './inc/user.php';
 
+/* - - - Run On Page Load - - - */
+
+// check if user is logged in; if they are, print message about them already being logged in
+if (isset($_SESSION['user_id'])) {
+    // run footer code if user isn't logged in; otherwise, it doesn't show at all, because die() terminates the script early
+    require './templates/footer.php';
+    die("You are already logged in.");
+}
+
 // initialize variable for storing error message
 $error = "";
+
+/* - - -  Form Functions - - - */
 
 // if form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
