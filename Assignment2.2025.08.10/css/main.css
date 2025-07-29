@@ -9,7 +9,7 @@
 /* - - - Body - - - */
 
 body {
-    background: lightgray;
+    background: linear-gradient(to bottom, #F8F9FA, #E0E0E0);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 80px 1fr 80px;
@@ -35,6 +35,11 @@ img {
 
 a {
     text-decoration: none;
+    color: #4682B4;
+}
+
+a:visited {
+    color: #778899;
 }
 
 /* - - - Main - - - */
@@ -79,7 +84,7 @@ button {
 /* - - - Header - - */
 
 #global-header {
-    background: aliceblue;
+    background: linear-gradient(to right, #F0F8FF, #D3D3D3);
     grid-area: global-header;
 }
 
@@ -134,7 +139,7 @@ button {
 /*  - - - Footer - - - */
 
 #global-footer {
-    background: aliceblue;
+    background: linear-gradient(to right, #D3D3D3, #F0F8FF);
     grid-area: global-footer;
 }
 
