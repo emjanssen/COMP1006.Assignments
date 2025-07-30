@@ -8,9 +8,8 @@
 
 /* - - - Variables - - - */
 
-/* Colours */
-
 :root {
+    /* background and text colours for header, main, footer, and links */
     --background-color-body: linear-gradient(to bottom right, #F2F6F2, #E8F0E8);
     --background-color-header: linear-gradient(to bottom right, #B8C8B8, #C7D8C7);
     --background-color-footer: linear-gradient(to top right, #B8C8B8, #C7D8C7);
@@ -19,14 +18,16 @@
     --text-color-header: #374235;
     --text-color-footer: #374235;
 
-    --text-font-family-body: Garamond, Baskerville, "Times New Roman", serif;;
-
     --link-color-body: #7A8F7B;
     --link-color-header: #64835f;
+
+    /* font family for body */
+    --text-font-family-body: Garamond, Baskerville, "Times New Roman", serif;;
 }
 
 /* - - - Body - - - */
 
+/* body managed by grid; three rows, one column */
 body {
     display: grid;
     grid-template-columns: 1fr;
@@ -54,6 +55,7 @@ h1 {
     padding: 0;
 }
 
+/* so images never extend horizontally outside their parent containers */
 img {
     max-width: 100%;
     height: auto;
@@ -74,6 +76,7 @@ main {
     padding-bottom: 2rem;
 }
 
+/* center main on each visitable page */
 #main-index,
 #main-login,
 #main-register,
@@ -97,6 +100,7 @@ main {
     margin: .5rem;
 }
 
+/* tiny bit of styling for buttons */
 button {
     padding: .1em;
     margin: .5rem;
@@ -114,6 +118,7 @@ button {
     color: var(--link-color-header);
 }
 
+/* header divided into three grid columns */
 #header-global-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -122,6 +127,7 @@ button {
     "header-global-grid-col-one header-global-grid-col-two header-global-grid-col-three";
 }
 
+/* each grid column is further managed via flex */
 #header-global-grid-col-one,
 #header-global-grid-col-two,
 #header-global-grid-col-three {
@@ -170,12 +176,14 @@ button {
     grid-area: global-footer;
 }
 
+/* footer also managed via grid (though there's only one column in this case) */
 #footer-global-grid {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
 }
 
+/* column managed with flex */
 #footer-global-grid-col-one {
     display: flex;
     justify-content: center;
