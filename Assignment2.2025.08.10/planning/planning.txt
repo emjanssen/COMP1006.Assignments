@@ -1,2 +1,0 @@
-To-Do (07.29 5:40:
-- Add functionality to add and delete a photo
