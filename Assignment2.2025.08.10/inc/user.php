@@ -83,7 +83,7 @@ class User
     {
         // check if username already exists; call the userExists() function to validate
         if ($this->userExists($username)) {
-            // user already exists; return false
+            // if user already exists, return false
             return false;
         }
 
@@ -163,7 +163,7 @@ class User
     public function deleteUser($id)
     {
         // SQL query to delete user by ID
-       $sqlDeleteUserByID = "DELETE FROM {$this->databaseTable} WHERE id = :id";
+        $sqlDeleteUserByID = "DELETE FROM {$this->databaseTable} WHERE id = :id";
 
         // Prepare the SQL query
         $sqlDeleteUserByIDStatement = $this->connection->prepare($sqlDeleteUserByID);
@@ -211,7 +211,40 @@ class User
         return $sqlUpdateEmailStatement->execute([':email_address' => $email, ':id' => $id]);
     }
 
+    public function updateProfilePhoto($id, $profile_photo)
+    {
+        $sqlUpdateProfilePhoto = "UPDATE {$this->databaseTable} SET profile_photo = :profile_photo WHERE id = :id";
+        $sqlUpdateProfilePhotoStatement = $this->connection->prepare($sqlUpdateProfilePhoto);
+
+        $profilePhotoFileName = $_FILES['profile_photo']['name'];
+        $temporaryProfilePhotoName = $_FILES['profile_photo']['tmp_name'];
+        $photoUploadOutcome = $_FILES['profile_photo']['error'];
+
+        if ($photoUploadOutcome === UPLOAD_ERR_OK) {
+            $targetFile = "./uploads/" . basename($profilePhotoFileName);
+            $fileExtension = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+            $validExtensions = array("jpeg", "jpg", "png");
+
+            if (in_array($fileExtension, $validExtensions)) {
+
+                if (move_uploaded_file($temporaryProfilePhotoName, $targetFile)) {
+                    $sqlUpdateProfilePhotoStatement->execute(array(
+                            ':profile_photo' => $targetFile,
+                            ':id' => $id
+                        ));
+                    $messageProfilePhoto = "Uploaded: " . htmlentities($profilePhotoFileName);
+                } else {
+                    $messageProfilePhoto = "Failed to move file: " . htmlspecialchars($profilePhotoFileName);
+                }
+            } else {
+                $messageProfilePhoto = "Invalid file type for: " . htmlspecialchars($profilePhotoFileName);
+            }
+        } else {
+            $messageProfilePhoto = "Error uploading file: " . htmlspecialchars($profilePhotoFileName) . " (Error code: $photoUploadOutcome)";
+        }
+    }
 }
+
 
 /* - - -  Data Validation Functions - - - */
 
@@ -239,5 +272,3 @@ class User
         $error = "Your email address input cannot be empty.";
     }
 }*/
-
-?>
