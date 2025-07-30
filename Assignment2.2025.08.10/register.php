@@ -82,25 +82,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = "Passwords do not match.";
     } else {
         // if password and confirmPassword do match, create a new database object, call getDatabaseConnection() on that object, and assign outcome to $databaseConnection
+        // going to validate username and email here as well (after we created the user object, and can then use user class functions)
         $database = new Database();
         $databaseConnection = $database->getDatabaseConnection();
 
         // create a new User object, passing in our $databaseConnection value
         $user = new User($databaseConnection);
 
+
+        // check if the username already exists in the database
+        // if it already exists, we will assign an error message, jump down to else statement, and skip over registering user
+        if (!empty($username)) {
+            if ($user->userExists($username)) {
+                // assign error message content if the message is already taken
+                $error = "That username is already in use. Please choose a different username.";
+            }
+        }
+
+        // check if the email already exists in the database
+        // if it already exists, we will assign an error message, jump down to else statement, and skip over registering user
+        if (!empty($email)) {
+            if ($user->userEmailExists($email)) {
+                // assign error message content if the message is already taken
+                $error = "That email is already in use. Please choose a different email.";
+            }
+        }
+
         /* attempt to register the user
         we call registerUser() from our user class object, and pass in the username and password values
         if this works properly, we redirected user to login page, so they can log in with their newly created credentials
+        we only execute this chunk of code if our $error variable still has the default variable we initialized it with at start of register.php; i.e. no errors have been identified
         */
-        if ($user->registerUser($username, $firstName, $lastName, $email, $password)) {
-            header('Location: login.php');
-            exit;
-        } else {
-            // if registration fails, assign registration failure message value to $error
-            $error = "Registration failed. Username may already exist.";
+        if ($error === "") {
+            if ($user->registerUser($username, $firstName, $lastName, $email, $password)) {
+                header('Location: login.php');
+                exit;
+            } else {
+                // if registration fails, assign registration failure message value to $error
+                // in-future, have more specific error message
+                $error = "Registration failed.";
+            }
         }
     }
 }
+
 ?>
 
     <main>
