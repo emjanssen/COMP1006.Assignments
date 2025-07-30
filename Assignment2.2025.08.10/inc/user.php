@@ -63,11 +63,35 @@ class User
         return $doesUserExistSQLStatement->fetch(PDO::FETCH_ASSOC) !== false;
     }
 
+    public function userEmailExists($email)
+    {
+        /* sql query to find user by email */
+        $doesUserEmailExistSQL = "SELECT email_address FROM {$this->databaseTable} WHERE email_address = :email_address";
+
+        /* prepare SQL query to prevent SQL injection */
+        $doesUserEmailExistSQLStatement = $this->connection->prepare($doesUserEmailExistSQL);
+
+        // executes our prepared query, and passes in the $email parameter to the :email placeholder we were using previously
+        $doesUserEmailExistSQLStatement->execute([':email_address' => $email]);
+
+        /* return true if row (i.e. row with relevant email) is found; otherwise, return false
+        if fetch() returns an array, a matching row has been found, and this expression is true; otherwise, expression evaluates to false */
+        return $doesUserEmailExistSQLStatement->fetch(PDO::FETCH_ASSOC) !== false;
+    }
+
     public function registerUser($username, $firstName, $lastName, $email, $password)
+        // in-future, refactor this so it echoes a more specific error message (ex. whether username or email is already taken)
+        // right now there's just a default echo output that says, 'Registration failed. Username may already exist.'
     {
         // check if username already exists; call the userExists() function to validate
         if ($this->userExists($username)) {
             // user already exists; return false
+            return false;
+        }
+
+        // check if email already exists; call the userEmailExists() function to validate
+        if ($this->userEmailExists($email)) {
+            // if email already exists, return false
             return false;
         }
 

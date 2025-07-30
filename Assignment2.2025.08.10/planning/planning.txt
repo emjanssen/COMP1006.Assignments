@@ -1,4 +1,2 @@
 To-Do (07.29 5:40:
-- User.php: add function to check whether an email is already registered
-- Register.php: add emailExists() function once it's created in user class
 - Add functionality to add and delete a photo
