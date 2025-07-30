@@ -80,8 +80,6 @@ class User
     }
 
     public function registerUser($username, $firstName, $lastName, $email, $password)
-        // in-future, refactor this so it echoes a more specific error message (ex. whether username or email is already taken)
-        // right now there's just a default echo output that says, 'Registration failed. Username may already exist.'
     {
         // check if username already exists; call the userExists() function to validate
         if ($this->userExists($username)) {
@@ -214,5 +212,32 @@ class User
     }
 
 }
+
+/* - - -  Data Validation Functions - - - */
+
+// Code snippet for future reference
+// Going to incorporate data validation into final project (proper email format, ensuring that names have letters, etc.)
+
+/*
+    if (!empty($newEmail)) {
+        // using filter_var() for email validation; built-in PHP function that's used to validate data
+        // its inputs are the value being validated (i.e. the email address, and the type of filter)
+        // in this case, FILTER_VALIDATE_EMAIL checks where the input is a properly formed email address
+        // if the validation returns true, then we move on to trying to update the email address
+        if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+            $updateSuccess = $user->updateEmail($userId, $newEmail);
+            if ($updateSuccess) {
+                $success = "Your email address has been successfully updated.";
+            } else {
+                $error = "Failed to update email address.";
+            }
+            // if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) returned false, it's not a valid, and we assign an error message value
+        } else {
+            $error = "Please enter a valid email address.";
+        }
+    } else {
+        $error = "Your email address input cannot be empty.";
+    }
+}*/
 
 ?>
