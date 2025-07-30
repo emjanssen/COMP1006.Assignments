@@ -8,7 +8,7 @@
 - The profile page has separate update functions for each data input
     - Update options should all be in one form with one update button, and the user should be able to update as few or as many inputs as they'd like
 - Successful registration redirects user to login page; might be better to send them right to profile page (still haven't decided which I like more)
-- Profile page currently echoes user data twice (once in form inputs, and once above the functions); keeping for visibility, but would be extraneous/undesirable for production code
+- Profile page currently echoes user data twice (once in form inputs, and once above the update forms); keeping for visibility, but would be extraneous/undesirable for production code
 - Also leaving in all my comments for learning purposes, even the really detailed ones; would remove/condense extraneous comments from production code
 - Might be better practice to keep a list of deleted users (with their associated data) in database; right now they're just removed from the database upon deletion
 - Standard echo works for basic error messages, but would be good to make those nicer to read
