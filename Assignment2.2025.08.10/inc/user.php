@@ -213,6 +213,10 @@ class User
         return $sqlUpdateEmailStatement->execute([':email_address' => $email, ':id' => $id]);
     }
 
+
+
+
+
 }
 
 ?>
