@@ -13,3 +13,5 @@
 - Might be better practice to keep a list of deleted users (with their associated data) in database; right now they're just removed from the database upon deletion
 - Standard echo works for basic error messages, but would be good to make those nicer to read
 - Super basic CSS could be made much nicer
+
+mostly things i want to include/do better for final project
