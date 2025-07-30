@@ -1,5 +1,5 @@
 <?php
-// Note: leaving detailed comments in because I find them useful for learning; would remove them from real life production code
+// Note: leaving detailed comments in because I find them useful for learning (and re-learning on re-read); would remove them from real life production code
 
 // database class to manage the database connection
 class Database
