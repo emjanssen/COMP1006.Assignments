@@ -277,7 +277,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
                  only going to allow one photo (i.e. profile photo) for this project; will expand to managing multiple photos on final project
                  -->
 
-                <form method="POST" action="user.php" enctype="multipart/form-data">
+                <form method="POST" action="photo.php" enctype="multipart/form-data">
                     <div>
                         <input type="file" id="profile_photo" name="profile_photo" required />
                     </div>
