@@ -285,6 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
                 <form method="POST" action="photo.php" enctype="multipart/form-data">
                     <div>
                         <input type="file" id="profile_photo" name="profile_photo" required />
+                        <p>Please ensure your photo is 2MB or smaller.</p>
                     </div>
                     <div>
                         <button type="submit">Upload Profile Photo</button>
