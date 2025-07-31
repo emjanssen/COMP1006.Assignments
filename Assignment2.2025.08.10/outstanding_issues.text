@@ -2,6 +2,7 @@
     - Should check that email inputs have the proper format/character content
     - Should check that first and last name inputs have letters
     - Should check that usernames are appropriate for usage
+    - Better validations for photo files
     - Will probably end up using a combination of built-in functions and/or regex for validation purposes
 - Code could be much dryer
     - Profile.php, register.php, and user.php should be refactored so we don't have a bunch of similar functions reusing similar code
