@@ -211,8 +211,15 @@ class User
         return $sqlUpdateEmailStatement->execute([':email_address' => $email, ':id' => $id]);
     }
 
-    public function updateProfilePhoto($id, $profile_photo)
+    public function updateProfilePhoto($id)
     {
+
+        // check to make sure the $_FILES array has been generated for profile_photo
+        // if it hasn't, return an error message
+        if (!isset($_FILES['profile_photo'])) {
+            return "No file uploaded";
+        }
+
         // here we write the sql statement that will update the user's profile photo
         // to safely include variables/arguments, we use placeholders, instead of directly inserting raw data/user inputs into the sql query string
         // :[word] is a named placeholder used in prepared statements; we don't include the actual value here; it gets bound/assigned later with execute()
@@ -311,6 +318,8 @@ class User
             // error message if the upload failed; also include error code, as captured by our $photoUploadOutcome variable
             $messageProfilePhoto = "Error uploading file: " . htmlspecialchars($profilePhotoFileName) . " (Error code: $photoUploadOutcome)";
         }
+        // return whatever our value for $messageProfilePhoto ended up being
+        return $messageProfilePhoto;
     }
 }
 

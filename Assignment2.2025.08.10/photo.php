@@ -36,7 +36,7 @@ $userId = $_SESSION['user_id'];
 
 // Check if a file has been submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_photo'])) {
-    $user->updateProfilePhoto($userId, $_FILES['profile_photo']);
+    $user->updateProfilePhoto($userId);
     // Optionally redirect to profile page or display a message
     header("Location: profile.php");
     exit;

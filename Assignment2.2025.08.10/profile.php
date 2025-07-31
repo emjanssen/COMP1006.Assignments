@@ -216,6 +216,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email_address'])) {
                     <p>Please update each piece of data individually.</p>
                 </div>
 
+                <?php if (isset($_SESSION['photo_message'])): ?>
+                    <p><?= htmlspecialchars($_SESSION['photo_message']) ?></p>
+                    <?php unset($_SESSION['photo_message']); ?>
+                <?php endif; ?>
+
                 <!-- forms for updating user data; each form action is linked to profile.php code -->
 
                 <!-- in-future, will refactor this all into one form; for now, i just wanted to learn the basics of updating user data -->
