@@ -1,4 +1,4 @@
-<?php /** @noinspection ALL */
+<?php
 
 // use built-in function to begin session so we can manage login state
 session_start();

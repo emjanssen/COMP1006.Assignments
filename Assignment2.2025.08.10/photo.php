@@ -4,9 +4,9 @@
 session_start();
 
 // page metadata
-$pageTitle = 'Profile';
-$pageDescription = "Manage your account details here.";
-$pageKeywords = 'profile, user, settings';
+$pageTitle = 'Photo';
+$pageDescription = "Page for calling photo update function.";
+$pageKeywords = 'photo, user, settings';
 
 // include necessary templates and classes
 require './templates/head.php';
