@@ -34,10 +34,15 @@ $user = new User($databaseConnection);
 // retrieve user ID from session
 $userId = $_SESSION['user_id'];
 
-// Check if a file has been submitted via POST
+// if the file has been submitted via POST, and we have a profile_photo value set in $_FILES array
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_photo'])) {
+
+    // we call updateProfilePhoto() from our user class and pass in the userId
     $user->updateProfilePhoto($userId);
-    // Optionally redirect to profile page or display a message
+
+    // in future will have better error validation here
+
+    // redirect to profile page on successful upload (in this case, where we already are)
     header("Location: profile.php");
     exit;
 }

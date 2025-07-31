@@ -214,11 +214,16 @@ class User
     public function updateProfilePhoto($id)
     {
 
-        // check to make sure the $_FILES array has been generated for profile_photo
-        // if it hasn't, return an error message
-        if (!isset($_FILES['profile_photo'])) {
-            return "No file uploaded";
-        }
+        /* saving this for reference later; next project is going to be build in data validation, like the photo size
+        // max permitted file size for the photo
+        $maxFileSize = 2097152; // 2MB in bytes
+        // verify file size of photo; if the file is larger than 2 bytes, we return an error message
+        // size is a key in the $_FILES array
+        if ($_FILES['profile_photo']['size'] > $maxFileSize) {
+            // return stops the rest of the updateProfilePhoto($id) function from executing
+            // returned message is handled in photo.php
+            return "File size must be 2MB or less.";
+        } */
 
         // here we write the sql statement that will update the user's profile photo
         // to safely include variables/arguments, we use placeholders, instead of directly inserting raw data/user inputs into the sql query string
