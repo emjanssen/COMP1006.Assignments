@@ -1,5 +1,5 @@
 <?php
-// Note: leaving detailed comments in because I find them useful for learning; would remove them from real life production code
+// Note: leaving super detailed comments in because I find them useful for learning; would remove them from real life production code
 
 // user class to manage user-related functions
 class User
@@ -213,33 +213,102 @@ class User
 
     public function updateProfilePhoto($id, $profile_photo)
     {
+        // here we write the sql statement that will update the user's profile photo
+        // to safely include variables/arguments, we use placeholders, instead of directly inserting raw data/user inputs into the sql query string
+        // :[word] is a named placeholder used in prepared statements; we don't include the actual value here; it gets bound/assigned later with execute()
+        // tldr - we use :<column_name> as the placeholder, then bind the relevant value to that placeholder before executing the statement
+        // if table data value is 'name', then placeholder becomes ':name'; if table data is 'user_profile', then placeholder becomes ':user_profile'; etc.
+        // doesn't have to match exactly, but best practice if it does
+        // "SET profile_photo = :profile_photo" means to set the column 'profile_photo' to a new value
         $sqlUpdateProfilePhoto = "UPDATE {$this->databaseTable} SET profile_photo = :profile_photo WHERE id = :id";
+
+        // then we prepare the statement
         $sqlUpdateProfilePhotoStatement = $this->connection->prepare($sqlUpdateProfilePhoto);
 
+        /* explanation of photo upload syntax
+
+        $_FILES is built-in; it's a superglobal array, and it's used to access files uploaded via an HTML <form enctype="multipart/form-data">
+        'profile_photo' is name attribute of our HTML form
+        'name' is a key in $_FILES['profile_photo'] array; it will return the original name of the file, as defined by the user who uploaded it  */
         $profilePhotoFileName = $_FILES['profile_photo']['name'];
+
+        /*'tmp_name' is another key the $_FILES['profile_photo'] array; provides path to temporary file on the server where the uploaded file has been stored
+        i.e. both 'tmp_name' and 'name' are built-in keys in the $_FILES associative array; this array is automatically created when a file is uploaded via a form
+
+        temp file in 'tmp_name' is automatically cleaned up unless we move it or read it during the same script execution (i.e. in this case, within this updateProfilePhoto() function)
+        details of what the $_FILES array includes when it's created:
+            $_FILES['profile_photo'] = [
+                'name' => '[filename].jpg',
+                'type' => 'image/[filetype]',           MIME type ((Multipurpose Internet Mail Extensions; tells browser/server the file type
+                'tmp_name' => '/tmp/[tempfilepath]',
+                'error' => [error code],                upload code of 0 would mean success
+                'size' => [file size in bytes]204800
+                ];        */
         $temporaryProfilePhotoName = $_FILES['profile_photo']['tmp_name'];
+
+        /*
+        retrieves upload error code for uploaded file
+        $_FILES superglobal holds an array for each uploaded file
+        'profile_photo' -> the name of the file input field in our HTML form
+        'error' -> one of the built-in keys in $_FILES array.
+        this results in an integer code that tells us whether the uploaded succeeded or failed (and why) */
         $photoUploadOutcome = $_FILES['profile_photo']['error'];
 
+        // UPLOAD_ERR_OK feels like a misnomer in the sense that it actually signifies upload was successful
+        // the numeric error code for successful upload is 0; so this if statement basically checks if the upload outcome === 0
+        // there are seven other codes to signify specific upload errors
+        // if the upload was successful
         if ($photoUploadOutcome === UPLOAD_ERR_OK) {
-            $targetFile = "./uploads/" . basename($profilePhotoFileName);
+
+            // set target directory
+            $uploadDirectory = "./uploads/";
+            // basename() is a built-in function that strips off directory path from a filename, leaving only the file name
+            // assigns the full path for the photo
+            // this ends up being: $targetFile = ./uploads/filename
+            $targetFile = $uploadDirectory . basename($profilePhotoFileName);
+
+            // get file extension in lowercase
+            // pathinfo() is a built-in function that returns info about a file path; PATHINFO_EXTENSION argument tells it to return just the extension
+            // convert to lowercase
+            // assign value to $fileExtension
             $fileExtension = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+            // instantiate an array with the permitted image file types
             $validExtensions = array("jpeg", "jpg", "png");
 
+            // check if our $fileExtension value is in our valid extensions array; returns true if $fileExtension is found
             if (in_array($fileExtension, $validExtensions)) {
 
-                if (move_uploaded_file($temporaryProfilePhotoName, $targetFile)) {
+                // attempt to move our file from temp location to uploads folder
+                // move_uploaded_file() tries to move first argument to second argument; returns true or false to $fileWasMoved
+                $fileWasMoved = move_uploaded_file($temporaryProfilePhotoName, $targetFile);
+
+                // if file was successfully moved
+                if ($fileWasMoved) {
+
+                    // update the database with the file path to the image by finally executing the $sqlUpdateProfilePhotoStatement script we prepared a while back
+                    // we pass in the location our image in the server, and assign it to the value of of our profile_photo placeholder
+                    // do the same with the id
                     $sqlUpdateProfilePhotoStatement->execute(array(
-                            ':profile_photo' => $targetFile,
-                            ':id' => $id
-                        ));
-                    $messageProfilePhoto = "Uploaded: " . htmlentities($profilePhotoFileName);
+                        ':profile_photo' => $targetFile,
+                        ':id' => $id
+                    ));
+
+                    // success message if we do manage to move it
+                    $messageProfilePhoto = "Uploaded: " . htmlspecialchars($profilePhotoFileName);
+
                 } else {
+                    // error message if we couldn't move the file
                     $messageProfilePhoto = "Failed to move file: " . htmlspecialchars($profilePhotoFileName);
                 }
+
             } else {
+                // error message if the file type wasn't valid
                 $messageProfilePhoto = "Invalid file type for: " . htmlspecialchars($profilePhotoFileName);
             }
+
         } else {
+            // error message if the upload failed; also include error code, as captured by our $photoUploadOutcome variable
             $messageProfilePhoto = "Error uploading file: " . htmlspecialchars($profilePhotoFileName) . " (Error code: $photoUploadOutcome)";
         }
     }
