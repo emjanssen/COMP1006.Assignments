@@ -273,7 +273,10 @@ class User
         if ($photoUploadOutcome === UPLOAD_ERR_OK) {
 
             // set target directory
-            $uploadDirectory = "./uploads/";
+            // __DIR__ will return the absolute path of this script's directory
+            // using it so the file system path works both locally and on the server (i.e. filezilla)
+            // using just $uploadDirectory = "/uploads/" was working for local testing, but wasn't working when I uploaded the assignment to Filezilla
+            $uploadDirectory = __DIR__ . "/uploads/";
             // basename() is a built-in function that strips off directory path from a filename, leaving only the file name
             // assigns the full path for the photo
             // this ends up being: $targetFile = ./uploads/filename
