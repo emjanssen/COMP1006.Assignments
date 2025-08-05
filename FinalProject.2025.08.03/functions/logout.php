@@ -1,22 +1,21 @@
 <?php
-// start session on page load
+// start session on load
 session_start();
 
-// page metadata
-$pageTitle = '';
-$pageDescription = '';
-$pageKeywords = '';
+// validate user login
+// if user is not logged in, print an error message and terminate page script
+if (!isset($_SESSION['user_id'])) {
+    http_response_code(403);
+    exit('Unauthorized');
+}
 
-// head and header
-require '../templates/head.php';
-require '../templates/header.php';
+// These rest of the code only runs if user is logged in //
 
-// classes
-
+/* - - - Classes - - - */
 
 /* - - - Functions - - - */
 
 /* - - - Run On Page Load - - - */
 
-// footer
-require '../templates/footer.php';
+?>
+emplates/footer.php';
