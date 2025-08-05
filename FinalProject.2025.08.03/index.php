@@ -8,15 +8,24 @@ $pageDescription = '';
 $pageKeywords = '';
 
 // head and header
-require './templates/head.php';
-require './templates/header.php';
+require '../templates/head.php';
+require '../templates/header.php';
 
-// classes
+?>
+    <main class="global-main">
 
+        <?php
 
-/* - - - Functions - - - */
+        /* - - - Classes - - - */
 
-/* - - - Run On Page Load - - - */
+        /* - - - Functions - - - */
+
+        /* - - - Run On Page Load - - - */
+
+        ?>
+    </main>
+<?php
 
 // footer
-require './templates/footer.php';
+require '../templates/footer.php';
+?>
