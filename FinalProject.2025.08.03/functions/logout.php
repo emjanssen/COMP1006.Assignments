@@ -18,4 +18,3 @@ if (!isset($_SESSION['user_id'])) {
 /* - - - Run On Page Load - - - */
 
 ?>
-emplates/footer.php';
