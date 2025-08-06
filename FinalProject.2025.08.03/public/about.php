@@ -9,10 +9,9 @@ $pageTitle = 'About';
 $pageDescription = 'About page.';
 $pageKeywords = 'about, information';
 
-// - - - Head and Header - - - //
+// - - - Head - - - //
 
 require '../templates/head.php';
-require '../templates/header.php';
 
 // - - - Required Files - - - //
 
@@ -21,16 +20,22 @@ require '../templates/header.php';
 /* - - - Helper Functions - - - */
 
 /* - - - Form Functions - - - */
-
 ?>
+
+<!-- HTML Body -->
+
+<body>
+
+<div class="body-grid">
+
+    <?php require '../templates/header.php'; ?>
 
     <main class="global-main">
 
     </main>
 
-<?php
+    <?php require '../templates/footer.php'; ?>
 
-// - - - Footer - - - //
+</div>
 
-require '../templates/footer.php';
-?>
+</body>
