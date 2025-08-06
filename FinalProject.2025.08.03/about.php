@@ -11,12 +11,12 @@ $pageKeywords = 'about, information';
 
 // - - - Head - - - //
 
-require '../templates/head.php';
+require './templates/head.php';
 
 // - - - Required Files - - - //
 
-require '../inc/database.php';
-require '../inc/user.php';
+require './inc/database.php';
+require './inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
@@ -38,20 +38,20 @@ require '../inc/user.php';
 
 <div class="body-grid">
 
-    <?php require '../templates/header.php'; ?>
+    <?php require './templates/header.php'; ?>
 
     <main class="global-main">
         <section id="about-landing">
             <h2><?php echo !empty($currentUser['user_title']) ? htmlspecialchars($currentUser['user_title']) : 'You can enter a title here.'; ?></h2>
             <p><?php echo !empty($currentUser['user_body']) ? htmlspecialchars($currentUser['user_body']) : 'You can enter some body content here.'; ?></p>
             <figure>
-                    <img src="../css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
+                    <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
                     <figcaption>User photo and caption go here.</figcaption>
             </figure>
         </section>
     </main>
 
-    <?php require '../templates/footer.php'; ?>
+    <?php require './templates/footer.php'; ?>
 
 </div>
 
