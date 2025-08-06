@@ -26,9 +26,9 @@ if (isset($_SESSION['user_id'])) {
     die("You are already logged in.");
 }
 
-/* - - - Form Functions - - - */
-
 $error = "";
+
+/* - - - Form Functions - - - */
 
 /*  If request method is post, and username and password have been entered correctly:
     - Start session with login credentials
