@@ -14,10 +14,31 @@ $pageKeywords = 'dashboard, users, accounts';
 require '../templates/head.php';
 
 // - - - Required Files - - - //
+require '../inc/database.php';
+require '../inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
-/* - - - Helper Functions - - - */
+// Validate user login; if user is not logged in, code stops executing here
+if (!isset($_SESSION['user_id'])) {
+    require '../templates/header.php';
+    require '../templates/footer.php';
+    die("Access denied. Please login.");
+}
+
+// Create Database() and User() objects
+$database = new Database();
+$databaseConnection = $database->getDatabaseConnection();
+$user = new User($databaseConnection);
+
+// Get user_id from the current session
+$userId = $_SESSION['user_id'];
+// Get current user using that user_id
+$currentUser = $user->findUser($userId);
+
+// Initialize error and success message variables
+$success = '';
+$error = '';
 
 /* - - - Form Functions - - - */
 
