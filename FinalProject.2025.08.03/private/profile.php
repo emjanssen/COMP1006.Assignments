@@ -9,10 +9,9 @@ $pageTitle = 'Profile';
 $pageDescription = 'User profile page.';
 $pageKeywords = 'profile, users, accounts';
 
-// - - - Head and Header - - - //
+// - - - Head - - - //
 
 require '../templates/head.php';
-require '../templates/header.php';
 
 // - - - Required Files - - - //
 
@@ -46,11 +45,11 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Trim user inputs
-    $newUsername   = trim($_POST['username'] ?? '');
-    $newFirstName  = trim($_POST['first_name'] ?? '');
-    $newLastName   = trim($_POST['last_name'] ?? '');
-    $newEmail      = trim($_POST['email_address'] ?? '');
-    $newPhone       = trim($_POST['phone_number'] ?? '');
+    $newUsername = trim($_POST['username'] ?? '');
+    $newFirstName = trim($_POST['first_name'] ?? '');
+    $newLastName = trim($_POST['last_name'] ?? '');
+    $newEmail = trim($_POST['email_address'] ?? '');
+    $newPhone = trim($_POST['phone_number'] ?? '');
 
     // Initialize success and error message variables
     $success = '';
@@ -133,84 +132,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<main class="global-main">
+<!-- HTML Body -->
 
-    <!-- Echo outcomes of pressing update buttons -->
+<body>
 
-    <!-- if $success isn't empty, print success message -->
-    <?php if (!empty($success)): ?>
-        <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
-    <?php endif; ?>
+<div class="body-grid">
 
-    <!-- if $error isn't empty, print error message -->
-    <?php if (!empty($error)): ?>
-        <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+    <?php require '../templates/header.php'; ?>
 
-    <!-- checks if we have a $currentUser value; we called findUser() upon page load -->
-    <?php if ($currentUser): ?>
+    <main class="global-main">
 
-        <!-- Update User Data Form -->
+        <!-- Echo outcomes of pressing update buttons -->
 
-        <form method="POST" action="profile.php">
-            <div>
-                <label for="username">New Username:</label>
-                <input type="text" id="username" name="username"
-                       value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
-            </div>
+        <!-- if $success isn't empty, print success message -->
+        <?php if (!empty($success)): ?>
+            <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
+        <?php endif; ?>
 
-            <div>
-                <label for="first_name">New First Name:</label>
-                <input type="text" id="first_name" name="first_name"
-                       value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
-            </div>
+        <!-- if $error isn't empty, print error message -->
+        <?php if (!empty($error)): ?>
+            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+        <?php endif; ?>
 
-            <div>
-                <label for="last_name">New Last Name:</label>
-                <input type="text" id="last_name" name="last_name"
-                       value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
-            </div>
+        <!-- checks if we have a $currentUser value; we called findUser() upon page load -->
+        <?php if ($currentUser): ?>
 
-            <div>
-                <label for="email_address">New Email Address:</label>
-                <input type="email" id="email_address" name="email_address"
-                       value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
-            </div>
+            <!-- Update User Data Form -->
 
-            <div>
-                <label for="phone_number">New Phone Number:</label>
-                <input type="tel" id="phone_number" name="phone_number"
-                       value="<?php echo htmlspecialchars($currentUser['phone_number']); ?>"/>
-            </div>
+            <form method="POST" action="profile.php">
+                <div>
+                    <label for="username">New Username:</label>
+                    <input type="text" id="username" name="username"
+                           value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
+                </div>
 
-            <div>
-                <button type="submit" name="update_profile">Update Profile</button>
-            </div>
-        </form>
+                <div>
+                    <label for="first_name">New First Name:</label>
+                    <input type="text" id="first_name" name="first_name"
+                           value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
+                </div>
 
-        <!-- Delete User Account -->
+                <div>
+                    <label for="last_name">New Last Name:</label>
+                    <input type="text" id="last_name" name="last_name"
+                           value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
+                </div>
 
-        <form method="POST" action="../inc/user.php"
-              onsubmit="return confirm('Are you sure you would like to delete your account?');">
-            <input type="hidden" name="delete_user"/>
-            <button type="submit">Delete Your Account</button>
-        </form>
+                <div>
+                    <label for="email_address">New Email Address:</label>
+                    <input type="email" id="email_address" name="email_address"
+                           value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
+                </div>
 
-        <!-- Logout -->
+                <div>
+                    <label for="phone_number">New Phone Number:</label>
+                    <input type="tel" id="phone_number" name="phone_number"
+                           value="<?php echo htmlspecialchars($currentUser['phone_number']); ?>"/>
+                </div>
 
-        <form method="POST" action="../inc/user.php">
-            <button type="submit">Logout</button>
-        </form>
+                <div>
+                    <button type="submit" name="update_profile">Update Profile</button>
+                </div>
+            </form>
 
-        <!-- if $currentUser is false/null, we echo a user not found message -->
-    <?php else: ?>
-        <p>User not found.</p>
-    <?php endif; ?>
+            <!-- Delete User Account -->
 
-</main>
+            <form method="POST" action="../inc/user.php"
+                  onsubmit="return confirm('Are you sure you would like to delete your account?');">
+                <input type="hidden" name="delete_user"/>
+                <button type="submit">Delete Your Account</button>
+            </form>
 
-<?php
-// - - - Footer - - - //
+            <!-- Logout -->
 
-require '../templates/footer.php';
-?>
+            <form method="POST" action="../inc/user.php">
+                <button type="submit">Logout</button>
+            </form>
+
+            <!-- if $currentUser is false/null, we echo a user not found message -->
+        <?php else: ?>
+            <p>User not found.</p>
+        <?php endif; ?>
+
+    </main>
+
+    <?php require '../templates/footer.php'; ?>
+</div>
+</body>
