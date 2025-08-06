@@ -117,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div id="about-two">
 
-                <h2><?php echo !empty($userContent['user_title']) ? htmlspecialchars($userContent['user_title']) : 'You can enter a title here.'; ?></h2>
-                <p><?php echo !empty($userContent['user_body']) ? htmlspecialchars($userContent['user_body']) : 'You can enter some body content here.'; ?></p>
+                <h2><?php echo !empty($userContent['user_title']) ? htmlspecialchars($userContent['user_title']) : "Please login to enter a title here."; ?></h2>
+                <p><?php echo !empty($userContent['user_body']) ? htmlspecialchars($userContent['user_body']) : "You'll also be able to enter some body content here."; ?></p>
                 <figure>
                     <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
                     <figcaption>User photo and caption go here.</figcaption>
