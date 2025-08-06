@@ -1,31 +1,36 @@
 <?php
-// start session on page load
+// - - - Start Session - - - //
+
 session_start();
 
-// page metadata
-$pageTitle = '';
-$pageDescription = '';
-$pageKeywords = '';
+// - - - Page Metadata - - - //
 
-// head and header
-require '../templates/head.php';
-require '../templates/header.php';
+$pageTitle = 'Home';
+$pageDescription = 'Home page.';
+$pageKeywords = 'home';
+
+// - - - Head and Header - - - //
+
+require './templates/head.php';
+require './templates/header.php';
+
+// - - - Required Files - - - //
+
+/* - - - Run On Page Load - - - */
+
+/* - - - Helper Functions - - - */
+
+/* - - - Form Functions - - - */
 
 ?>
+
     <main class="global-main">
 
-        <?php
-
-        /* - - - Classes - - - */
-
-        /* - - - Functions - - - */
-
-        /* - - - Run On Page Load - - - */
-
-        ?>
     </main>
+
 <?php
 
-// footer
-require '../templates/footer.php';
+// - - - Footer - - - //
+
+require './templates/footer.php';
 ?>
