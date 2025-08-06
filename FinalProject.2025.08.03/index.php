@@ -29,11 +29,15 @@ require './templates/head.php'; ?>
 
             <h2>Please check out the following links:</h2>
 
+            <div id="landing-page-links">
+
             <h3><a href="public/about.php">About</a></h3>
             <h3><a href="public/login.php">Login</a></h3>
             <h3><a href="public/register.php">Register</a></h3>
             <h3><a href="private/profile.php">Profile</a></h3>
             <h3><a href="private/dashboard.php">Dashboard</a></h3>
+
+            </div>
 
         </section>
 
