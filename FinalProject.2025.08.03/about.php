@@ -21,8 +21,8 @@ require './inc/user.php';
 /* - - - Run On Page Load - - - */
 
 // Initialize error and success message variables
-    $success = '';
-    $error = '';
+$success = '';
+$error = '';
 
 if (isset($_SESSION['user_id'])) {
 // Create Database() and User() objects
@@ -46,27 +46,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newTitle = trim($_POST['user_title'] ?? '');
         $newBody = trim($_POST['user_body'] ?? '');
 
-        if (!empty($newTitle)) {
-            $updateSuccess = $user->updateUserTitle($userId, $newTitle);
-            if ($updateSuccess) {
+        // Validate and update title
+        if (validateTitle($newTitle) === null) {
+            if ($user->updateUserTitle($userId, $newTitle)) {
                 $success = "Title updated successfully.";
             } else {
                 $error = "Failed to update title.";
             }
+        } else {
+            $error = "Invalid title.";
         }
 
-        if (!empty($newBody)) {
-            $updateSuccess = $user->updateUserBody($userId, $newBody);
-            if ($updateSuccess) {
-                $success = "Body updated successfully.";
+        // Validate and update body
+        if (validateBody($newBody) === null) {
+            if ($user->updateUserBody($userId, $newBody)) {
+                $success = isset($success) ? $success . " Body updated successfully." : "Body updated successfully.";
             } else {
                 $error = "Failed to update body.";
             }
+        } else {
+            $error = "Invalid body.";
         }
 
         $userContent = $user->getUserContent($userId);
     }
 }
+
 
 ?>
 
@@ -123,9 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
                     <figcaption>User photo and caption go here.</figcaption>
                 </figure>
-
             </div>
-
         </section>
     </main>
 
