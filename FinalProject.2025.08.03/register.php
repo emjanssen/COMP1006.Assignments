@@ -24,9 +24,7 @@ require './inc/user.php';
 
 // if user is not logged in, the code for this file stops executing here
 if (isset($_SESSION['user_id'])) {
-    require './templates/header.php';
-    echo("You are already logged in.");
-    require './templates/footer.php';
+    header("Location: profile.php");
     exit;
 }
 
