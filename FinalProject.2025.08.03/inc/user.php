@@ -9,8 +9,10 @@ class User
 
     // database connection
     private PDO $connection;
-    // table wherein data will be stored
-    private string $databaseTable = 'users_final_project';
+    // table wherein user data will be stored
+    private string $tableAdmin = 'final_project_admin';
+    // table wherein user content be stored
+    private string $tableContent = 'final_project_content';
 
     /* - - - Constructor - - - */
 
@@ -26,7 +28,7 @@ class User
 
     public function userExists($username): bool
     {
-        $sql = "SELECT id FROM {$this->databaseTable} WHERE username = :username";
+        $sql = "SELECT id FROM {$this->tableAdmin} WHERE username = :username";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
@@ -36,7 +38,7 @@ class User
 
     public function emailExists($email): bool
     {
-        $sql = "SELECT email_address FROM {$this->databaseTable} WHERE email_address = :email_address";
+        $sql = "SELECT email_address FROM {$this->tableAdmin} WHERE email_address = :email_address";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':email_address' => $email]);
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
@@ -47,7 +49,7 @@ class User
     public function registerUser($username, $password, $firstName, $lastName, $emailAddress, $phoneNumber): bool
     {
         $hash = hash('sha512', $password);
-        $sql = "INSERT INTO {$this->databaseTable} (username, password, first_name, last_name, email_address, phone_number)
+        $sql = "INSERT INTO {$this->tableAdmin} (username, password, first_name, last_name, email_address, phone_number)
             VALUES (:username, :password, :first_name, :last_name, :email_address, :phone_number)";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([
@@ -64,7 +66,7 @@ class User
     public function loginUser($username, $password): array|false
     {
         $hash = hash('sha512', $password);
-        $sql = "SELECT * FROM {$this->databaseTable} WHERE username = :username AND password = :password";
+        $sql = "SELECT * FROM {$this->tableAdmin} WHERE username = :username AND password = :password";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':username' => $username, ':password' => $hash]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -74,7 +76,7 @@ class User
 
     public function getAllUsers(): array
     {
-        $stmt = $this->connection->query("SELECT * FROM {$this->databaseTable}");
+        $stmt = $this->connection->query("SELECT * FROM {$this->tableAdmin}");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -82,7 +84,7 @@ class User
 
     public function findUser($id): array|false
     {
-        $sql = "SELECT * FROM {$this->databaseTable} WHERE user_id = :id";
+        $sql = "SELECT * FROM {$this->tableAdmin} WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -92,45 +94,62 @@ class User
 
     public function deleteUser($id): bool
     {
-        $sql = "DELETE FROM {$this->databaseTable} WHERE user_id = :id";
+        $sql = "DELETE FROM {$this->tableAdmin} WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':id' => $id]);
     }
 
-    // Update username
+    // - Update username - //
 
     public function updateUsername($id, $username): bool
     {
-        $sql = "UPDATE {$this->databaseTable} SET username = :username WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableAdmin} SET username = :username WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':username' => $username, ':id' => $id]);
     }
 
     public function updateFirstName($id, $firstName): bool
     {
-        $sql = "UPDATE {$this->databaseTable} SET first_name = :first_name WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableAdmin} SET first_name = :first_name WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':first_name' => $firstName, ':id' => $id]);
     }
 
     public function updateLastName($id, $lastName): bool
     {
-        $sql = "UPDATE {$this->databaseTable} SET last_name = :last_name WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableAdmin} SET last_name = :last_name WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':last_name' => $lastName, ':id' => $id]);
     }
 
     public function updateEmail($id, $email): bool
     {
-        $sql = "UPDATE {$this->databaseTable} SET email_address = :email_address WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableAdmin} SET email_address = :email_address WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':email_address' => $email, ':id' => $id]);
     }
 
     public function updatePhoneNumber($id, $phoneNumber): bool
     {
-        $sql = "UPDATE {$this->databaseTable} SET phone_number = :phone_number WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableAdmin} SET phone_number = :phone_number WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([':phone_number' => $phoneNumber, ':id' => $id]);
     }
+
+    // - Update Content - //
+
+    public function updateUserTitle($id, $title): bool
+    {
+        $sql = "UPDATE {$this->tableContent} SET user_title = :title WHERE user_id = :id";
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute([':user_title' => $title, ':id' => $id]);
+    }
+
+    public function updateUserBody($id, $body): bool
+    {
+        $sql = "UPDATE {$this->tableContent} SET user_body = :body WHERE user_id = :id";
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute([':user_body' => $body, ':id' => $id]);
+    }
+
 }
