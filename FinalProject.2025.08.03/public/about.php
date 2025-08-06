@@ -13,7 +13,25 @@ $pageKeywords = 'about, information';
 
 require '../templates/head.php';
 
-?>
+// - - - Required Files - - - //
+
+require '../inc/database.php';
+require '../inc/user.php';
+require '../public/about.php';
+
+/* - - - Run On Page Load - - - */
+
+    if (isset($_SESSION['user_id'])) {
+        // Create Database() and User() objects
+        $database = new Database();
+        $databaseConnection = $database->getDatabaseConnection();
+        $user = new User($databaseConnection);
+
+        // Get user_id from the current session
+        $userId = $_SESSION['user_id'];
+        // Get current user using that user_id
+        $currentUser = $user->findUser($userId);
+    } ?>
 
 <!-- HTML Body -->
 
@@ -25,12 +43,12 @@ require '../templates/head.php';
 
     <main class="global-main">
         <section id="about-landing">
-            <h2>User title goes here.</h2>
-            <p>User blog entry goes here.</p>
+            <h2><?php echo htmlspecialchars($currentUser['user_title'] ?? ''); ?></h2>
+            <p><?php echo htmlspecialchars($currentUser['user_body'] ?? ''); ?></p>
                 <figure>
                     <img src="../css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
                     <figcaption>User photo and caption go here.</figcaption>
-            </div>
+            </figure>
         </section>
     </main>
 
