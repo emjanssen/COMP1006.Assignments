@@ -29,9 +29,9 @@ if (isset($_SESSION['user_id'])) {
     die("You are already logged in.");
 }
 
-/* - - - Form Functions - - - */
-
 $error = "";
+
+/* - - - Form Functions - - - */
 
 // Get User Inputs //
 
