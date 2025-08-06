@@ -9,28 +9,38 @@ $pageTitle = 'Home';
 $pageDescription = 'Home page.';
 $pageKeywords = 'home';
 
-// - - - Head and Header - - - //
+// - - - Head - - - //
 
-require './templates/head.php';
-require './templates/header.php';
+require './templates/head.php'; ?>
 
-// - - - Required Files - - - //
+<!-- - - - HTML Body - - -->
 
-/* - - - Run On Page Load - - - */
+<body>
 
-/* - - - Helper Functions - - - */
+<div class="body-grid">
 
-/* - - - Form Functions - - - */
-
-?>
+    <?php require './templates/header.php'; ?>
 
     <main class="global-main">
 
+        <section id="landing-page-welcome">
+
+            <h1>Welcome to our website.</h1>
+
+            <h2>Please check out the following links:</h2>
+
+            <h3><a href="public/about.php">About</a></h3>
+            <h3><a href="public/login.php">Login</a></h3>
+            <h3><a href="public/register.php">Register</a></h3>
+            <h3><a href="private/profile.php">Profile</a></h3>
+            <h3><a href="private/dashboard.php">Dashboard</a></h3>
+
+        </section>
+
     </main>
 
-<?php
+    <?php require './templates/footer.php'; ?>
 
-// - - - Footer - - - //
+</div>
 
-require './templates/footer.php';
-?>
+</body>
