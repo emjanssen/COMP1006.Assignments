@@ -1,7 +1,4 @@
 <?php
-// start session on load
-session_start();
-
 /* - - - Run On Page Load - - - */
 
 // validate user login
