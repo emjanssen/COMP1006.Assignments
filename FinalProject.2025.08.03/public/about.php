@@ -1,31 +1,36 @@
 <?php
-// start session on page load
+// - - - Start Session - - - //
+
 session_start();
 
-// page metadata
-$pageTitle = '';
-$pageDescription = '';
-$pageKeywords = '';
+// - - - Page Metadata - - - //
 
-// head and header
+$pageTitle = 'Dashboard';
+$pageDescription = 'Dashboard for all users.';
+$pageKeywords = 'dashboard, users, accounts';
+
+// - - - Head and Header - - - //
+
 require '../templates/head.php';
 require '../templates/header.php';
 
+// - - - Required Files - - - //
+
+/* - - - Run On Page Load - - - */
+
+/* - - - Helper Functions - - - */
+
+/* - - - Form Functions - - - */
+
 ?>
-<main class="global-main">
 
-    <?php
+    <main class="global-main">
 
-    /* - - - Classes - - - */
+    </main>
 
-    /* - - - Functions - - - */
-
-    /* - - - Run On Page Load - - - */
-
-    ?>
-</main>
 <?php
 
-// footer
+// - - - Footer - - - //
+
 require '../templates/footer.php';
-?>footer.php';
+?>
