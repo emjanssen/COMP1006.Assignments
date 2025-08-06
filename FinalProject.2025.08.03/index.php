@@ -31,11 +31,11 @@ require './templates/head.php'; ?>
 
             <div id="landing-page-links">
 
-            <h3><a href="public/about.php">About</a></h3>
-            <h3><a href="public/login.php">Login</a></h3>
-            <h3><a href="public/register.php">Register</a></h3>
-            <h3><a href="private/profile.php">Profile</a></h3>
-            <h3><a href="private/dashboard.php">Dashboard</a></h3>
+            <h3><a href="about.php">About</a></h3>
+            <h3><a href="login.php">Login</a></h3>
+            <h3><a href="register.php">Register</a></h3>
+            <h3><a href="profile.php">Profile</a></h3>
+            <h3><a href="dashboard.php">Dashboard</a></h3>
 
             </div>
 
