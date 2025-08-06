@@ -20,9 +20,14 @@ require './inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
+// Validate Login Status //
+
+// if user is not logged in, the code for this file stops executing here
 if (isset($_SESSION['user_id'])) {
+    require './templates/header.php';
+    echo("You are already logged in.");
     require './templates/footer.php';
-    die("You are already logged in.");
+    exit;
 }
 
 $error = "";
@@ -54,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loginResult = $user->loginUser($username, $password);
 
     if ($loginResult) {
-        $_SESSION['user_id'] = $loginResult['id'];
+        $_SESSION['user_id'] = $loginResult['user_id'];
         $_SESSION['username'] = $loginResult['username'];
 
         header('Location: profile.php');
