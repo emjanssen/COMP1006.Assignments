@@ -22,6 +22,7 @@ require '../inc/user.php';
 
 // Validate user login; if user is not logged in, code stops executing here
 if (!isset($_SESSION['user_id'])) {
+    require '../templates/header.php';
     require '../templates/footer.php';
     die("Access denied. Please login.");
 }
