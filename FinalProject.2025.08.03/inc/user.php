@@ -28,7 +28,7 @@ class User
 
     public function userExists($username): bool
     {
-        $sql = "SELECT id FROM {$this->tableAdmin} WHERE username = :username";
+        $sql = "SELECT user_id FROM {$this->tableAdmin} WHERE username = :username";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC) !== false;
@@ -59,6 +59,19 @@ class User
             ':last_name' => $lastName,
             ':email_address' => $emailAddress,
             ':phone_number' => $phoneNumber]);
+    }
+
+    // Create Default Content During User Registration //
+
+    public function createDefaultContent($userID, $userTitle = '', $userBody = '') {
+        $sql = "INSERT INTO {$this->tableContent} (user_id, user_title, user_body) 
+            VALUES (:user_id, :user_title, :user_body)";
+        $stmt = $this->connection->prepare($sql);
+        return $stmt->execute([
+            ':user_id' => $userID,
+            ':user_title' => $userTitle,
+            ':user_body' => $userBody
+        ]);
     }
 
     // Login User //
