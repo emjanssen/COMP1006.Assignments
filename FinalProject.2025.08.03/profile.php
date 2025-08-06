@@ -20,6 +20,11 @@ require './inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
+// Initialize error and success message variables
+$success = '';
+$error = '';
+
+
 // Validate user login; if user is not logged in, code stops executing here
 if (!isset($_SESSION['user_id'])) {
     require './templates/header.php';
@@ -39,10 +44,6 @@ $currentUser = $user->findUser($userId);
 // Get current content data for user
 $userContent = $user->getUserContent($userId);
 
-// Initialize error and success message variables
-$success = '';
-$error = '';
-
 /* - - - Form Functions - - - */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -53,10 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newLastName = trim($_POST['last_name'] ?? '');
         $newEmail = trim($_POST['email_address'] ?? '');
         $newPhone = trim($_POST['phone_number'] ?? '');
-
-        // Initialize success and error message variables
-        $success = '';
-        $error = '';
 
         // Username update
         if (!empty($newUsername)) {
@@ -130,27 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $error = "Phone number cannot be empty.";
         }
-    } elseif (isset($_POST['update_content'])) {
-        $newTitle = trim($_POST['user_title'] ?? '');
-        $newBody = trim($_POST['user_body'] ?? '');
-
-        if (!empty($newTitle)) {
-            $updateSuccess = $user->updateUserTitle($userId, $newTitle);
-            if ($updateSuccess) {
-                $success = "Title updated successfully.";
-            } else {
-                $error = "Failed to update title.";
-            }
-        }
-
-        if (!empty($newBody)) {
-            $updateSuccess = $user->updateUserBody($userId, $newBody);
-            if ($updateSuccess) {
-                $success = "Body updated successfully.";
-            } else {
-                $error = "Failed to update body.";
-            }
-        }
     }
 }
 ?>
@@ -167,96 +143,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="profile-landing">
 
-        <!-- Echo outcomes of pressing update buttons -->
+            <!-- Echo outcomes of pressing update buttons -->
 
-        <!-- if $success isn't empty, print success message -->
-        <?php if (!empty($success)): ?>
-            <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
-        <?php endif; ?>
+            <!-- if $success isn't empty, print success message -->
+            <?php if (!empty($success)): ?>
+                <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
+            <?php endif; ?>
 
-        <!-- if $error isn't empty, print error message -->
-        <?php if (!empty($error)): ?>
-            <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
-        <?php endif; ?>
+            <!-- if $error isn't empty, print error message -->
+            <?php if (!empty($error)): ?>
+                <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+            <?php endif; ?>
 
-        <!-- checks if we have a $currentUser value; we called findUser() upon page load -->
-        <?php if ($currentUser): ?>
+            <!-- checks if we have a $currentUser value; we called findUser() upon page load -->
+            <?php if ($currentUser): ?>
 
-            <!-- Update User Data Form -->
+                <!-- Update User Data Form -->
 
-            <form method="POST" action="profile.php" id="form-profile-update-data">
-                <div>
-                    <label for="username">New Username:</label>
-                    <input type="text" id="username" name="username"
-                           value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
+                <form method="POST" action="profile.php" id="form-profile-update-data">
+                    <div>
+                        <label for="username">New Username:</label>
+                        <input type="text" id="username" name="username"
+                               value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
+                    </div>
+
+                    <div>
+                        <label for="first_name">New First Name:</label>
+                        <input type="text" id="first_name" name="first_name"
+                               value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
+                    </div>
+
+                    <div>
+                        <label for="last_name">New Last Name:</label>
+                        <input type="text" id="last_name" name="last_name"
+                               value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
+                    </div>
+
+                    <div>
+                        <label for="email_address">New Email Address:</label>
+                        <input type="email" id="email_address" name="email_address"
+                               value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
+                    </div>
+
+                    <div>
+                        <label for="phone_number">New Phone Number:</label>
+                        <input type="tel" id="phone_number" name="phone_number"
+                               value="<?php echo htmlspecialchars($currentUser['phone_number']); ?>"/>
+                    </div>
+
+                    <div>
+                        <button type="submit" name="update_profile">Update Profile</button>
+                    </div>
+                </form>
+
+                <div id="forms-delete-logout">
+
+                    <!-- Delete User Account -->
+
+                    <form method="POST" action="functions/delete.php" id="form-profile-delete"
+                          onsubmit="return confirm('Are you sure you would like to delete your account?');">
+                        <input type="hidden" name="delete_user"/>
+                        <button type="submit">Delete Your Account</button>
+                    </form>
+
+                    <!-- Logout -->
+
+                    <form method="POST" action="functions/logout.php" id="form-profile-logout">
+                        <button type="submit">Logout</button>
+                    </form>
+
                 </div>
 
-                <div>
-                    <label for="first_name">New First Name:</label>
-                    <input type="text" id="first_name" name="first_name"
-                           value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
-                </div>
-
-                <div>
-                    <label for="last_name">New Last Name:</label>
-                    <input type="text" id="last_name" name="last_name"
-                           value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
-                </div>
-
-                <div>
-                    <label for="email_address">New Email Address:</label>
-                    <input type="email" id="email_address" name="email_address"
-                           value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
-                </div>
-
-                <div>
-                    <label for="phone_number">New Phone Number:</label>
-                    <input type="tel" id="phone_number" name="phone_number"
-                           value="<?php echo htmlspecialchars($currentUser['phone_number']); ?>"/>
-                </div>
-
-                <div>
-                    <button type="submit" name="update_profile">Update Profile</button>
-                </div>
-            </form>
-
-            <!-- Update Content -->
-
-            <form method="POST" action="profile.php" id="form-profile-update-content">
-                <div>
-                    <label for="user_title">Title:</label>
-                    <input type="text" id="user_title" name="user_title"
-                           placeholder="Please enter your title here."
-                           value="<?php echo htmlspecialchars($currentUser['user_title'] ?? ''); ?>" />
-                </div>
-                <div>
-                    <label for="body">Body:</label>
-                    <textarea name="user_body" id="user_body" placeholder="Please enter your body content here."
-                              maxlength="300"><?php echo htmlspecialchars($currentUser['user_body'] ?? ''); ?></textarea>
-                </div>
-                <div>
-                    <button type="submit" name="update_content">Update Content</button>
-                </div>
-            </form>
-
-            <!-- Delete User Account -->
-
-            <form method="POST" action="functions/delete.php" id="form-profile-delete"
-                  onsubmit="return confirm('Are you sure you would like to delete your account?');">
-                <input type="hidden" name="delete_user"/>
-                <button type="submit">Delete Your Account</button>
-            </form>
-
-            <!-- Logout -->
-
-            <form method="POST" action="functions/logout.php" id="form-profile-logout">
-                <button type="submit">Logout</button>
-            </form>
-
-            <!-- if $currentUser is false/null, we echo a user not found message -->
-        <?php else: ?>
-            <p>User not found.</p>
-        <?php endif; ?>
+                <!-- if $currentUser is false/null, we echo a user not found message -->
+            <?php else: ?>
+                <p>User not found.</p>
+            <?php endif; ?>
 
         </div>
 
