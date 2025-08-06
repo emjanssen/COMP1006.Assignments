@@ -12,7 +12,6 @@ $pageKeywords = 'profile, registration, users, accounts';
 // - - - Head and Header - - - //
 
 require './templates/head.php';
-require './templates/header.php';
 
 // - - - Required Files - - - //
 
@@ -25,8 +24,10 @@ require './inc/user.php';
 
 // if user is not logged in, the code for this file stops executing here
 if (isset($_SESSION['user_id'])) {
+    require './templates/header.php';
+    echo("You are already logged in.");
     require './templates/footer.php';
-    die("You are already logged in.");
+    exit;
 }
 
 $error = "";
@@ -95,6 +96,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<body>
+
+<div class="body-grid">
+
+    <?php require './templates/header.php'; ?>
+
     <main class="global-main">
 
         <section id="register-landing">
@@ -136,9 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         </section>
     </main>
-<?php
 
-// - - - Footer - - - //
+    <?php require './templates/footer.php'; ?>
+</div>
 
-require './templates/footer.php';
-?>
+</body>
