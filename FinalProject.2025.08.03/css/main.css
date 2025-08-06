@@ -78,6 +78,7 @@ a:active {
     "global-header"
     "global-main"
     "global-footer";
+    min-height: 100vh;
 }
 
 /* Form */
@@ -207,7 +208,6 @@ form button[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 85vh;
 }
 
 #landing-page-links {
@@ -229,7 +229,6 @@ form button[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 85vh;
 }
 
 /* Register Page */
@@ -239,7 +238,6 @@ form button[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 85vh;
 }
 
 /* Profile Page */
@@ -248,7 +246,6 @@ form button[type="submit"]:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 85vh;
 }
 
 #profile-landing form {
@@ -325,7 +322,6 @@ figure {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 85vh;
 }
 
 #dashboard-table {
