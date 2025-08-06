@@ -44,11 +44,11 @@ class User
 
     // Register User //
 
-    public function registerUser($username, $password, $firstName, $lastName, $emailAddress, $phoneNumber, $photo): bool
+    public function registerUser($username, $password, $firstName, $lastName, $emailAddress, $phoneNumber): bool
     {
         $hash = hash('sha512', $password);
-        $sql = "INSERT INTO {$this->databaseTable} (username, password, first_name, last_name, email_address, phone_number, photo)
-            VALUES (:username, :password, :first_name, :last_name, :email_address, :phone_number, :photo)";
+        $sql = "INSERT INTO {$this->databaseTable} (username, password, first_name, last_name, email_address, phone_number)
+            VALUES (:username, :password, :first_name, :last_name, :email_address, :phone_number)";
         $stmt = $this->connection->prepare($sql);
         return $stmt->execute([
             ':username' => $username,
@@ -56,9 +56,7 @@ class User
             ':first_name' => $firstName,
             ':last_name' => $lastName,
             ':email_address' => $emailAddress,
-            ':phone_number' => $phoneNumber,
-            ':photo' => $photo
-        ]);
+            ':phone_number' => $phoneNumber]);
     }
 
     // Login User //
