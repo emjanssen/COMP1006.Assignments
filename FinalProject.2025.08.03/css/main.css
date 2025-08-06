@@ -298,14 +298,19 @@ figure {
     align-items: center;
 }
 
-#about-one,
-#about-two {
+#about-one {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     margin: 1rem;
 }
+
+#about-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ }
 
 #form-profile-update-content {
     display: flex;
