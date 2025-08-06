@@ -9,10 +9,9 @@ $pageTitle = 'Login';
 $pageDescription = 'Login page.';
 $pageKeywords = 'profile, login, users, accounts';
 
-// - - - Head and Header - - - //
+// - - - Head - - - //
 
 require '../templates/head.php';
-require '../templates/header.php';
 
 // - - - Required Files - - - //
 
@@ -66,9 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
+
+<!-- HTML Body -->
+
+<body>
+<div class="body-grid">
+
+    <?php require '../templates/header.php'; ?>
+
     <main class="global-main">
         <!-- If $error has a value, echo error message in red -->
-        <?php if (!empty($error)) { echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>'; } ?>
+        <?php if (!empty($error)) {
+            echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
+        } ?>
 
         <form method="POST" action="login.php">
             <div>
@@ -85,9 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </main>
 
-<?php
+    <?php require '../templates/footer.php'; ?>
 
-// - - - Footer - - - //
+</div>
 
-require '../templates/footer.php';
-?>
+</body>
