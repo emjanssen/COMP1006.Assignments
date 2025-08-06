@@ -9,10 +9,9 @@ $pageTitle = 'Dashboard';
 $pageDescription = 'Dashboard for all users.';
 $pageKeywords = 'dashboard, users, accounts';
 
-// - - - Head and Header - - - //
+// - - - Head - - - //
 
 require '../templates/head.php';
-require '../templates/header.php';
 
 // - - - Required Files - - - //
 
@@ -24,13 +23,19 @@ require '../templates/header.php';
 
 ?>
 
+<!-- HTML Body -->
+
+<body>
+
+<div class="body-grid">
+
+    <?php require '../templates/header.php'; ?>
+
     <main class="global-main">
 
     </main>
 
-<?php
+    <?php require '../templates/footer.php'; ?>
 
-// - - - Footer - - - //
-
-require '../templates/footer.php';
-?>
+</div>
+</body>
