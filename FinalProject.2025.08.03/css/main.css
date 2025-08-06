@@ -96,7 +96,8 @@ form input[type="submit"],
 form input[type="tel"],
 form input[type="email"],
 form input[type="password"],
-form button[type="submit"] {
+form button[type="submit"],
+form textarea {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     padding: 0.5em;
@@ -263,6 +264,35 @@ figure {
     align-items: center;
     justify-content: center;
     min-height: 85vh;
+}
+
+/* Profile Page */
+
+#profile-landing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-landing form {
+    margin: 2rem;
+}
+
+#profile-landing form button[type="submit"] {
+    width: 100%;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    background: var(--form-button-background-color);
+    color: var(--form-button-text-color);
+    padding: .75rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+form button[type="submit"]:hover {
+    transform: translateY(1px);
+    background: var(--form-button-background-color-hover);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
 /* - - - Footer - - - */
