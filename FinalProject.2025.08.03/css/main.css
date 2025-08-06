@@ -18,6 +18,12 @@
     --body-links-active-font-color: #35465c;
     --body-links-focus-outline-color: #95a3ad;
 
+    --form-background-color: #f0f1f3;
+    --form-text-color: #50504d;
+    --form-button-background-color: #74808a;
+    --form-button-background-color-hover: #8a959e;
+    --form-button-text-color: #f5f6f7;
+
     --header-background-color: #d4d7d9;
     --header-text-color: #3e4448;
 
@@ -72,6 +78,47 @@ a:active {
     "global-header"
     "global-main"
     "global-footer";
+}
+
+/* Form */
+
+form {
+    padding: 2rem;
+    background: var(--form-background-color);
+    color: var(--form-text-color);
+    box-shadow: 0 0 5px rgba(23, 22, 22, 0.2);
+    border-radius: 10px;
+}
+
+/* targets all the input labels/areas in the form */
+form input[type="text"],
+form input[type="submit"],
+form input[type="tel"],
+form input[type="email"],
+form input[type="password"],
+form button[type="submit"] {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button[type="submit"] {
+    width: 30%;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    background: var(--form-button-background-color);
+    color: var(--form-button-text-color);
+    padding: .75rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+form button[type="submit"]:hover {
+    transform: translateY(1px);
+    background: var(--form-button-background-color-hover);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
 /* - - - Header - - */
