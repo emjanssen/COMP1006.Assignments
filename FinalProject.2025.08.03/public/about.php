@@ -25,9 +25,12 @@ require '../templates/head.php';
 
     <main class="global-main">
         <section id="about-landing">
-            <h2>This is our fictional organization.</h2>
-            <p>This is some information about what we do.</p>
-            <img src="../css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
+            <h2>User title goes here.</h2>
+            <p>User blog entry goes here.</p>
+                <figure>
+                    <img src="../css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
+                    <figcaption>User photo and caption go here.</figcaption>
+            </div>
         </section>
     </main>
 
