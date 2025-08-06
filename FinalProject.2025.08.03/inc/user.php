@@ -155,14 +155,24 @@ class User
     {
         $sql = "UPDATE {$this->tableContent} SET user_title = :title WHERE user_id = :id";
         $stmt = $this->connection->prepare($sql);
-        return $stmt->execute([':user_title' => $title, ':id' => $id]);
+        return $stmt->execute([':title' => $title, ':id' => $id]);
     }
+
 
     public function updateUserBody($id, $body): bool
     {
-        $sql = "UPDATE {$this->tableContent} SET user_body = :body WHERE user_id = :id";
+        $sql = "UPDATE {$this->tableContent} SET user_body = :user_body WHERE user_id = :user_id";
         $stmt = $this->connection->prepare($sql);
-        return $stmt->execute([':user_body' => $body, ':id' => $id]);
+        return $stmt->execute([':user_body' => $body, ':user_id' => $id]);
     }
 
+
+    // Get User Content //
+    public function getUserContent($userId) {
+        // LIMIT 1 clause tells database to return at most one row from query result, even if more rows match condition
+        $sql = "SELECT user_title, user_body FROM {$this->tableContent} WHERE user_id = :user_id LIMIT 1";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute([':user_id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
