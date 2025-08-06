@@ -168,7 +168,7 @@ form button[type="submit"]:hover {
 #header-nav-ul li {
     text-decoration: none;
     list-style: none;
-    margin: 1.5rem;
+    margin: 2em;
 }
 
 #header-nav-ul li a:focus {
