@@ -5,6 +5,8 @@
 // database class to manage the database connection
 class Database
 {
+    /* - - - Variables - - - */
+
     // private variables for database login credentials
     private $host = "";
     private $databaseName = "";
@@ -13,6 +15,8 @@ class Database
 
     // public variable to hold our database connection once connection has been established
     public $connection;
+
+    /* - - - Methods - - - */
 
     // function for connecting to the database
     public function getDatabaseConnection()
