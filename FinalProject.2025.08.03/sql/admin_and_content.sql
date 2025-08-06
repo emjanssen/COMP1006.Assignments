@@ -1,3 +1,4 @@
+-- fields available during user registration
 CREATE TABLE final_project_admin
 (
     admin_id      INT AUTO_INCREMENT PRIMARY KEY,
@@ -7,11 +8,11 @@ CREATE TABLE final_project_admin
     last_name     VARCHAR(128) NOT NULL,
     email_address VARCHAR(128) NOT NULL UNIQUE,
     phone_number  VARCHAR(20)  NOT NULL UNIQUE,
-    photo         VARCHAR(255) DEFAULT NULL,
     created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
     updated_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+-- fields to manage user-added content
 CREATE TABLE final_project_content
 (
     content_id INT AUTO_INCREMENT PRIMARY KEY,
