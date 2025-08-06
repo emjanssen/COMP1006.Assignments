@@ -9,16 +9,11 @@
 
     <nav id="header-nav">
         <ul id="header-nav-ul">
-            <!-- Root Folder -->
             <li><a href="../index.php">Home</a></li>
-
-            <!-- Public -->
-            <li><a href="../about.php">About</a></li>
             <li><a href="../login.php">Login</a></li>
             <li><a href="../register.php">Register</a></li>
-
-            <!-- Private -->
             <li><a href="../profile.php">Profile</a></li>
+            <li><a href="../about.php">About</a></li>
             <li><a href="../dashboard.php">Dashboard</a></li>
         </ul>
     </nav>
