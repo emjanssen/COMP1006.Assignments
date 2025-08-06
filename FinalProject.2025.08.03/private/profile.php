@@ -5,9 +5,9 @@ session_start();
 
 // - - - Page Metadata - - - //
 
-$pageTitle = 'Dashboard';
-$pageDescription = 'Dashboard for all users.';
-$pageKeywords = 'dashboard, users, accounts';
+$pageTitle = 'Profile';
+$pageDescription = 'User profile page.';
+$pageKeywords = 'profile, users, accounts';
 
 // - - - Head and Header - - - //
 
