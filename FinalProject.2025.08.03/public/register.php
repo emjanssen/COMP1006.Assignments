@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
     <main class="global-main">
 
+        <section id="register-landing">
         <!-- if we have an error message value, echo the error message in red -->
         <?php if (!empty($error)) {echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';}?>
 
@@ -124,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit">Register</button>
             </div>
         </form>
+        </section>
     </main>
 <?php
 

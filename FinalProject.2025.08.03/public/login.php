@@ -75,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require '../templates/header.php'; ?>
 
     <main class="global-main">
+
+        <section id="login-landing">
         <!-- If $error has a value, echo error message in red -->
         <?php if (!empty($error)) {
             echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
@@ -93,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit">Login</button>
             </div>
         </form>
+        </section>
     </main>
 
     <?php require '../templates/footer.php'; ?>

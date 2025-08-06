@@ -197,11 +197,6 @@ form button[type="submit"]:hover {
 
 .global-main {
     grid-area: global-main;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 85vh;
 }
 
 /* Index Page */
@@ -211,6 +206,7 @@ form button[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 85vh;
 }
 
 #landing-page-links {
@@ -223,6 +219,44 @@ form button[type="submit"]:hover {
 
 #landing-page-links h3 {
     margin: .5rem;
+}
+
+/* About Page */
+
+#about-landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#about-landing h2 {
+    margin: 2rem;
+}
+
+#about-landing img {
+    max-height: 600px;
+    width: auto;
+    margin: 2rem;
+}
+
+/* Login Page */
+
+#login-landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
+}
+
+/* Register Page */
+
+#register-landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 85vh;
 }
 
 /* - - - Footer - - - */
