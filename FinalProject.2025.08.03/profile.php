@@ -36,6 +36,8 @@ $user = new User($databaseConnection);
 $userId = $_SESSION['user_id'];
 // Get current user using that user_id
 $currentUser = $user->findUser($userId);
+// Get current content data for user
+$userContent = $user->getUserContent($userId);
 
 // Initialize error and success message variables
 $success = '';
@@ -163,6 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main class="global-main">
 
+        <div id="profile-landing">
+
         <!-- Echo outcomes of pressing update buttons -->
 
         <!-- if $success isn't empty, print success message -->
@@ -180,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Update User Data Form -->
 
-            <form method="POST" action="profile.php">
+            <form method="POST" action="profile.php" id="form-profile-update-data">
                 <div>
                     <label for="username">New Username:</label>
                     <input type="text" id="username" name="username"
@@ -218,12 +222,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Update Content -->
 
-            <form method="POST" action="profile.php">
+            <form method="POST" action="profile.php" id="form-profile-update-content">
                 <div>
                     <label for="user_title">Title:</label>
                     <input type="text" id="user_title" name="user_title"
                            placeholder="Please enter your title here."
-                           value="<?php echo htmlspecialchars($currentUser['user_title']); ?>"/>
+                           value="<?php echo htmlspecialchars($currentUser['user_title'] ?? ''); ?>" />
                 </div>
                 <div>
                     <label for="body">Body:</label>
@@ -235,10 +239,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
 
-
             <!-- Delete User Account -->
 
-            <form method="POST" action="inc/user.php"
+            <form method="POST" action="functions/delete.php" id="form-profile-delete"
                   onsubmit="return confirm('Are you sure you would like to delete your account?');">
                 <input type="hidden" name="delete_user"/>
                 <button type="submit">Delete Your Account</button>
@@ -246,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Logout -->
 
-            <form method="POST" action="inc/user.php">
+            <form method="POST" action="functions/logout.php" id="form-profile-logout">
                 <button type="submit">Logout</button>
             </form>
 
@@ -254,6 +257,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php else: ?>
             <p>User not found.</p>
         <?php endif; ?>
+
+        </div>
 
     </main>
 
