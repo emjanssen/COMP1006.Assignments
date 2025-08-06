@@ -168,7 +168,7 @@ form button[type="submit"]:hover {
 #header-nav-ul li {
     text-decoration: none;
     list-style: none;
-    margin: 2em;
+    margin: 1em;
 }
 
 #header-nav-ul li a:focus {
@@ -276,4 +276,13 @@ figure {
 
     background: var(--footer-background-color);
     color: var(--footer-text-color);
+}
+
+/* - - - Media Queries - - - */
+
+
+@media (max-width: 800px) {
+    #header-nav-ul li {
+        margin: .2em;
+    }
 }
