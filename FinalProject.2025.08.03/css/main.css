@@ -222,30 +222,6 @@ form button[type="submit"]:hover {
     margin: .5rem;
 }
 
-/* About Page */
-
-#about-landing {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#about-landing h2 {
-    margin: 1.5rem;
-}
-
-#about-landing img {
-    max-height: 600px;
-    width: auto;
-    margin: 2rem;
-}
-
-figure {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 /* Login Page */
 
 #login-landing {
@@ -272,6 +248,7 @@ figure {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 85vh;
 }
 
 #profile-landing form {
@@ -295,6 +272,70 @@ form button[type="submit"]:hover {
     cursor: pointer;
 }
 
+/* About Page */
+
+#about-landing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+
+#about-landing h2 {
+    margin: 1rem;
+}
+
+#about-landing img {
+    max-height: 600px;
+    width: auto;
+    margin: 2rem;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#about-one,
+#about-two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+}
+
+#form-profile-update-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#form-profile-update-content button[type="submit"],
+#form-profile-update-content input[type="text"],
+#form-profile-update-content textarea {
+    padding: 1rem;
+    width: 100%;
+}
+
+/* Dashboard Page */
+
+#landing-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 85vh;
+}
+
+#dashboard-table {
+    padding: 3rem;
+}
+
+#dashboard-table tr td {
+    padding: 1rem;
+}
+
 /* - - - Footer - - - */
 
 .global-footer {
@@ -303,16 +344,21 @@ form button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     height: 70px;
-
     background: var(--footer-background-color);
     color: var(--footer-text-color);
 }
 
 /* - - - Media Queries - - - */
 
-
 @media (max-width: 800px) {
+
     #header-nav-ul li {
         margin: .2em;
+    }
+}
+
+@media (max-width: 1200px) {
+    #profile-landing {
+        flex-direction: column;
     }
 }
