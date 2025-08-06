@@ -1,4 +1,4 @@
-<header id="global-header">
+<header class="global-header">
     <div id="header-logo">
         <img id="img-logo" src="../css/img/headerLogo.png" alt="Page logo.">
     </div>
