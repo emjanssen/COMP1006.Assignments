@@ -3,6 +3,13 @@
 
 session_start();
 
+// - - - Success Values - - //
+
+if (isset($_SESSION['success'])) {
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+}
+
 // - - - Page Metadata - - - //
 
 $pageTitle = 'About';
@@ -59,37 +66,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
     $titleUpdated = false;
     $bodyUpdated = false;
 
-    // Title
+// Title validation and update
     $titleValidation = validateTitle($title);
-    // return the result of title validation
     if ($titleValidation === null) {
-        // if null, it passed checks and is valid
         $titleUpdated = $user->updateUserTitle($userId, $title);
         if (!$titleUpdated) {
             $error = "Failed to update title";
         }
     } else {
-        // if result wasn't null, we assign the returned error message to out error variable
         $titleError = $titleValidation;
     }
 
-    // Body
+// Body validation and update (separate from title validation)
     $bodyValidation = validateBody($body);
     if ($bodyValidation === null) {
         $bodyUpdated = $user->updateUserBody($userId, $body);
         if (!$bodyUpdated) {
-            $error = "Failed to update body.";
-        } else {
-            $bodyError = $bodyValidation;
+            $error = $error ? $error . " and body" : "Failed to update body";
         }
+    } else {
+        $bodyError = $bodyValidation;
+    }
 
-        if ($titleUpdated || $bodyUpdated) {
-            $success = "Your content was updated.";
-            header("Location: about.php");
-            exit;
-        }
-
-        $userContent = $user->getUserContent($userId);
+    if ($titleUpdated || $bodyUpdated) {
+        $userContent = $user->getUserContent($userId);  // Get fresh data first
+        $_SESSION['success'] = "Your content was updated.";
+        header("Location: about.php");
+        exit;
     }
 }
 ?>
