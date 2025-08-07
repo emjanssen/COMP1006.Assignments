@@ -38,10 +38,8 @@ $currentUser = [];
 $userContent = [];
 
 // Initialize error and success message variables
-$error = '';
 $titleError = '';
 $bodyError = '';
-$success = '';
 
 // Create DB/User objects just once
 if (isset($_SESSION['user_id'])) {
@@ -98,13 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
         $bodyError = $bodyValidation;
     }
 
-    if ($titleUpdated || $bodyUpdated) {
-        // refresh data first
-        $userContent = $user->getUserContent($userId);
-        $_SESSION['success'] = "Your content was updated.";
-        header("Location: about.php");
-        exit;
-    }
 }
 ?>
 
