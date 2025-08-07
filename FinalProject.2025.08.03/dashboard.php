@@ -44,7 +44,6 @@ $user = new User($databaseConnection);
 
         <div id="landing-dashboard">
 
-
             <table id="dashboard-table">
 
                 <?php
@@ -59,24 +58,27 @@ $user = new User($databaseConnection);
                     <th>Email Address</th>
                     <th>Phone Number</th>
                     <th>Account Creation Date</th>
+                    <th>Actions</th>
                 </tr>
 
-                <?php
-                foreach ($listOfUsers as $returnedUser) {
-
-                    // iterate over each value in $listOfUsers array
-                    echo "<tr>";
-                    // start a new table row
-                    echo "<td>" . htmlspecialchars($returnedUser['user_id']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['username']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['first_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['last_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['email_address']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['phone_number']) . "</td>";
-                    echo "<td>" . htmlspecialchars($returnedUser['created_at']) . "</td>";
-                    echo "</tr>";
-                    // end of the table row
-                } ?>
+                <?php foreach ($listOfUsers as $returnedUser): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($returnedUser['user_id']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['username']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['first_name']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['last_name']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['email_address']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['phone_number']) ?></td>
+                        <td><?= htmlspecialchars($returnedUser['created_at']) ?></td>
+                        <td>
+                            <form method="POST" action="functions/delete.php"
+                                  onsubmit="return confirm('Are you sure you would like to delete this account?');">
+                                <input type="hidden" name="delete_user" value="<?= $returnedUser['user_id'] ?>">
+                                <button type="submit" class="delete-btn" id="button-dashboard-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </table>
         </div>
     </main>
@@ -85,3 +87,13 @@ $user = new User($databaseConnection);
 
 </div>
 </body>
+
+<form
+        method="POST"
+        action="functions/delete.php"
+        id="form-profile-delete"
+        onsubmit="return confirm('Are you sure you would like to delete your account?');"
+>
+    <input type="hidden" name="delete_user" />
+    <button type="submit">Delete Your Account</button>
+</form>
