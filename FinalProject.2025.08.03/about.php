@@ -151,13 +151,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                         <!-- is user isn't logged in, display default message; if they are, display their content -->
                         <?php echo !empty($userContent['user_title'])
                                 ? htmlspecialchars($userContent['user_title'])
-                                : "Please login to enter a title here."; ?>
+                                : "This is the default title value."; ?>
                     </h2>
 
                     <p>
                         <?php echo !empty($userContent['user_body'])
                                 ? htmlspecialchars($userContent['user_body'])
-                                : "You'll also be able to enter some body content here."; ?>
+                                : "This is the default body value."; ?>
                     </p>
 
                     <figure>
