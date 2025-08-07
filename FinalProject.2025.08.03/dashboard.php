@@ -73,8 +73,12 @@ $user = new User($databaseConnection);
                         <td>
                             <form method="POST" action="functions/delete.php"
                                   onsubmit="return confirm('Are you sure you would like to delete this account?');">
+                                <!-- when user clicks delete, POST request us submitted to delete.php -->
+                                <!-- the request contains a form field called delete_user; this field has the user ID we wish to delete -->
+                                <!-- name="delete_user"	is the key used in $_POST['delete_user'] on server side -->
+                                <!-- hidden input, not visible in UI; access it using $_POST['delete_user'] -->
                                 <input type="hidden" name="delete_user" value="<?= $returnedUser['user_id'] ?>">
-                                <button type="submit" class="delete-btn" id="button-dashboard-delete">Delete</button>
+                                <button type="submit">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -87,13 +91,3 @@ $user = new User($databaseConnection);
 
 </div>
 </body>
-
-<form
-        method="POST"
-        action="functions/delete.php"
-        id="form-profile-delete"
-        onsubmit="return confirm('Are you sure you would like to delete your account?');"
->
-    <input type="hidden" name="delete_user" />
-    <button type="submit">Delete Your Account</button>
-</form>
