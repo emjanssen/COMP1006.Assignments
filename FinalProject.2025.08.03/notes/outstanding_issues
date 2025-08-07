@@ -1,13 +1,36 @@
+// - - - Assignment Specs - - - //
+
 About.php:
 1. No delete function yet for body, title, and image inputs
 
-Photo.php:
-1. Still need photo validation re: size
-
 Dashboard.php:
 1. Delete user function works; still need an update user function
+
+I'll add these in-future.
+I know how to do them, but I gotta start working on a different final project.
+
+About.php/photo.php:
+1. Photo uploads work locally; don't work on FileZilla.
+- Ran into same issue with Assignment 2 and haven't been able to resolve it; not sure what I'm doing wrong.
+
+// - - - General - - - //
 
 Site-wide:
 1. Inconsistent error processing and echoing
 - Something to clean up/do better in future
 - Might make a utility class/file for more consistent error and echo functions
+- Am also going to make more consistent use of echoing messages on page load via something like:
+
+// if we have success or error messages saved into our sessions, save those to a variable, then unset the error/success message
+if (isset($_SESSION['success'])) {
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+}
+
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
+}
+
+2. Right now, my directory retains all uploaded photos, even if the image is no longer in use (i.e. the user has uploaded a new one).
+- Need to add functionality that removes extraneous image files from database.
