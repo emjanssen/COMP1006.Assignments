@@ -6,12 +6,11 @@ About.php:
 Dashboard.php:
 1. Delete user function works; still need an update user function
 
-I'll add these in-future.
-I know how to do them, but I gotta start working on a different final project.
+I know how to do these, but I gotta start working on a different project, so I'll come back to these in-future.
 
 About.php/photo.php:
-1. Photo uploads work locally; don't work on FileZilla.
-- Ran into same issue with Assignment 2 and haven't been able to resolve it; not sure what I'm doing wrong.
+1. Photo upload functionality isn't working via FileZilla.
+- As far as I can tell, the code is pointing to the right folder on the server, but the folder isn't writable.
 
 // - - - General - - - //
 
