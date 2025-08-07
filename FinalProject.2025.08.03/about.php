@@ -52,7 +52,8 @@ if (isset($_SESSION['user_id'])) {
     $currentUser = $user->findUser($userId);
 }
 
-// Always get the latest user content (after POST redirect)
+// always get latest user content after the post redirect
+// this should let us echo out the photo content for logged-in user
 if (isset($user) && isset($userId)) {
     $userContent = $user->getUserContent($userId);
 }
@@ -73,8 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
     $titleUpdated = false;
     $bodyUpdated = false;
 
-// Title validation and update
+    // title validation and update
     $titleValidation = validateTitle($title);
+    // if the result of calling validateTitle() is null, we have no errors
     if ($titleValidation === null) {
         $titleUpdated = $user->updateUserTitle($userId, $title);
         if (!$titleUpdated) {
@@ -84,8 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
         $titleError = $titleValidation;
     }
 
-// Body validation and update (separate from title validation)
+    // body validation and update
     $bodyValidation = validateBody($body);
+    // if the result of calling validateBody() is null, we have no errors
     if ($bodyValidation === null) {
         $bodyUpdated = $user->updateUserBody($userId, $body);
         if (!$bodyUpdated) {
@@ -96,7 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
     }
 
     if ($titleUpdated || $bodyUpdated) {
-        $userContent = $user->getUserContent($userId);  // Get fresh data first
+        // refresh data first
+        $userContent = $user->getUserContent($userId);
         $_SESSION['success'] = "Your content was updated.";
         header("Location: about.php");
         exit;
@@ -129,6 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
             <div id="about-one">
 
                 <!-- Form for title and body -->
+                <!-- title and body contents are echoing properly into form input fields on update/page refresh -->
                 <form method="POST" action="about.php" id="form-profile-update-content">
                     <div>
                         <label for="user_title">Title:</label>
@@ -155,6 +160,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                     </div>
                 </form>
 
+                <!-- separate form for updating image -->
+                <!-- don't need to try to echo anythng into form here -->
                 <form method="POST" action="./functions/photo.php" enctype="multipart/form-data" id="form-image">
                     <div id="inner-form-image">
                         <div>
@@ -169,22 +176,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                 <!-- // - - - About Two - - - // -->
 
                 <div id="about-two">
+                    <!-- is user isn't logged in, display default body message; if they are, display their content -->
                     <h2>
-                        <!-- is user isn't logged in, display default message; if they are, display their content -->
                         <?php echo !empty($userContent['user_title'])
                                 ? htmlspecialchars($userContent['user_title'])
                                 : "This is the default title value."; ?>
                     </h2>
 
+                    <!-- is user isn't logged in, display default body message; if they are, display their content -->
                     <p>
                         <?php echo !empty($userContent['user_body'])
                                 ? htmlspecialchars($userContent['user_body'])
                                 : "This is the default body value."; ?>
                     </p>
 
+                    <!-- is user isn't logged in, display image; if they are, display their content -->
                     <figure>
                         <?php if (!empty($userContent['user_image'])): ?>
-                            <img src="<?php echo htmlspecialchars($userContent['user_image']); ?>"
+                            <img src="<?php echo ($userContent['user_image']); ?>"
                                  alt="User uploaded image">
                         <?php else: ?>
                             <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
