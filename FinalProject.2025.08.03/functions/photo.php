@@ -18,19 +18,27 @@ $database = new Database();
 $databaseConnection = $database->getDatabaseConnection();
 $user = new User($databaseConnection);
 
+// call getter function so we can get private variable from user class
 $tableContent = $user->getContentTable();
 
-// Handle image upload
+// image upload: assign user's filename, temp file name, and error message/result of upload
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['user_image'])) {
     $fileName = $_FILES['user_image']['name'];
     $tempName = $_FILES['user_image']['tmp_name'];
     $uploadResult = $_FILES['user_image']['error'];
 
+    // if we didn't get an error, assign a target directory for the file
     if ($uploadResult === UPLOAD_ERR_OK) {
+
+        // - - - Do not change this directory target - - - //
+        // it works locally to add photos to the uploads folder
+        // this points to uploads folder on server filesystem, relative to this script in photo.php
         $directory = "../uploads/";
+
         $targetFile = $directory . basename($fileName);
 
         if (move_uploaded_file($tempName, $targetFile)) {
+            // going go try just uploads/filename and see if filezilla can resolve that filepath
             $imagePathForDatabase = "uploads/" . $fileName;
 
             $sql = "UPDATE {$tableContent} SET user_image = :user_image WHERE user_id = :user_id";
@@ -52,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['user_image'])) {
     exit;
 }
 
-// Fallback if no file submitted
+// Fallback error and redirect if no file submitted
 $_SESSION['error'] = "No file uploaded.";
 header("Location: ../about.php");
 exit;
