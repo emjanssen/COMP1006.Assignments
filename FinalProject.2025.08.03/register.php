@@ -105,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } else {
 
+                    // call all the validation functions; if any of them are not null, then we have an error message; add that error messages to the errors array
                     if ($usernameValidation !== null) {
                         $validationErrors[] = $usernameValidation;
                     }
@@ -135,34 +136,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="global-main">
 
         <section id="register-landing">
-            <!-- if we have an error message value, echo the error message in red -->
-            <?php if (!empty($error)) {
-                echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
-            } ?>
 
+            <!-- if $error isn't empty or our $validationErrors array isn't empty, display error messages in table -->
             <?php if (!empty($error) || !empty($validationErrors)): ?>
+
+                <!-- Start of an HTML table with red-colored text for error messages -->
                 <table style="color: red; margin-bottom: 1rem;">
+
                     <thead>
                     <tr>
+                        <!-- Table header cell labeled "Errors" -->
                         <th>Errors</th>
                     </tr>
                     </thead>
+
                     <tbody>
+                    <!-- check if our general $error variable is not empty -->
                     <?php if (!empty($error)): ?>
                         <tr>
+                            <!-- print $error message in table cell -->
                             <td><?php echo htmlspecialchars($error); ?></td>
                         </tr>
                     <?php endif; ?>
+
+                    <!-- use for each to loop through each item in our $validationErrors array -->
                     <?php foreach ($validationErrors as $message): ?>
                         <tr>
+                            <!-- print out each of the validation errors -->
                             <td><?php echo htmlspecialchars($message); ?></td>
                         </tr>
                     <?php endforeach; ?>
+
                     </tbody>
+
                 </table>
+
             <?php endif; ?>
 
 
+            <!-- form for all the user inputs on the registration page; calls the register.php page (i.e. code further up this page) -->
             <form method="POST" action="register.php">
                 <div>
                     <label for="username">Username:</label>
