@@ -20,10 +20,9 @@ require './inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
-// Initialize error and success message variables
-$success = '';
-$error = '';
-
+// Initialize arrays for error and success message variables
+$errors = [];
+$successes = [];
 
 // Validate user login; if user is not logged in, code stops executing here
 if (!isset($_SESSION['user_id'])) {
@@ -56,75 +55,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Username update
         if (!empty($newUsername)) {
-            if ($user->userExists($newUsername)) {
-                $error = "That username is already in use. Please choose a different username.";
+            if ($newUsername !== $currentUser['username'] && $user->userExists($newUsername)) {
+                $errors[] = "That username is already in use. Please choose a different username.";
             } else {
                 $updateSuccess = $user->updateUsername($userId, $newUsername);
                 if ($updateSuccess) {
-                    $success = "Username updated successfully.";
+                    $successes[] = "Username updated successfully.";
                     $_SESSION['username'] = $newUsername;
                 } else {
-                    $error = "Failed to update username. Please try again.";
+                    $errors[] = "Failed to update username. Please try again.";
                 }
             }
         } else {
-            $error = "Username cannot be empty.";
+            $errors[] = "Username cannot be empty.";
         }
 
         // First name update
         if (!empty($newFirstName)) {
             $updateSuccess = $user->updateFirstName($userId, $newFirstName);
             if ($updateSuccess) {
-                $success = "First name updated successfully.";
+                $successes[] = "First name updated successfully.";
             } else {
-                $error = "Failed to update first name. Please try again.";
+                $errors[] = "Failed to update first name. Please try again.";
             }
         } else {
-            $error = "First name cannot be empty.";
+            $errors[] = "First name cannot be empty.";
         }
 
         // Last name update
         if (!empty($newLastName)) {
             $updateSuccess = $user->updateLastName($userId, $newLastName);
             if ($updateSuccess) {
-                $success = "Last name updated successfully.";
+                $successes[] = "Last name updated successfully.";
             } else {
-                $error = "Failed to update last name. Please try again.";
+                $errors[] = "Failed to update last name. Please try again.";
             }
         } else {
-            $error = "Last name cannot be empty.";
+            $errors[] = "Last name cannot be empty.";
         }
 
         // Email address logic
         if (!empty($newEmail)) {
-            if ($user->emailExists($newEmail)) {
-                $error = "That email is already in use. Please choose a different email.";
+            if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Please enter a valid email address.";
+            } elseif ($newEmail !== $currentUser['email_address'] && $user->emailExists($newEmail)) {
+                $errors[] = "That email is already in use. Please choose a different email.";
             } else {
-                if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
-                    $updateSuccess = $user->updateEmail($userId, $newEmail);
-                    if ($updateSuccess) {
-                        $success = "Email address updated successfully.";
-                    } else {
-                        $error = "Failed to update email address. Please try again.";
-                    }
+                $updateSuccess = $user->updateEmail($userId, $newEmail);
+                if ($updateSuccess) {
+                    $successes[] = "Email address updated successfully.";
                 } else {
-                    $error = "Please enter a valid email address.";
+                    $errors[] = "Failed to update email address. Please try again.";
                 }
             }
         } else {
-            $error = "Email address cannot be empty.";
+            $errors[] = "Email address cannot be empty.";
         }
+
 
         // Phone number update
         if (!empty($newPhone)) {
             $updateSuccess = $user->updatePhoneNumber($userId, $newPhone);
             if ($updateSuccess) {
-                $success = "Phone number updated successfully.";
+                $successes[] = "Phone number updated successfully.";
             } else {
-                $error = "Failed to update phone number. Please try again.";
+                $errors[] = "Failed to update phone number. Please try again.";
             }
         } else {
-            $error = "Phone number cannot be empty.";
+            $errors[] = "Phone number cannot be empty.";
         }
     }
 }
@@ -142,16 +140,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="profile-landing">
 
-            <!-- Echo outcomes of pressing update buttons -->
-
-            <!-- if $success isn't empty, print success message -->
-            <?php if (!empty($success)): ?>
-                <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
+            <?php if (!empty($errors)): ?>
+                <div style="color: red; margin-bottom: 1rem;">
+                    <strong>Errors:</strong>
+                    <ul>
+                        <?php foreach ($errors as $err): ?>
+                            <li><?php echo htmlspecialchars($err); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             <?php endif; ?>
 
-            <!-- if $error isn't empty, print error message -->
-            <?php if (!empty($error)): ?>
-                <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+            <?php if (!empty($successes)): ?>
+                <div style="color: green; margin-bottom: 1rem;">
+                    <strong>Success:</strong>
+                    <ul>
+                        <?php foreach ($successes as $msg): ?>
+                            <li><?php echo htmlspecialchars($msg); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             <?php endif; ?>
 
             <!-- checks if we have a $currentUser value; we called findUser() upon page load -->
@@ -165,31 +173,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="text" id="username" name="username"
                                value="<?php echo htmlspecialchars($currentUser['username']); ?>"/>
                     </div>
-
                     <div>
                         <label for="first_name">New First Name:</label>
                         <input type="text" id="first_name" name="first_name"
                                value="<?php echo htmlspecialchars($currentUser['first_name']); ?>"/>
                     </div>
-
                     <div>
                         <label for="last_name">New Last Name:</label>
                         <input type="text" id="last_name" name="last_name"
                                value="<?php echo htmlspecialchars($currentUser['last_name']); ?>"/>
                     </div>
-
                     <div>
                         <label for="email_address">New Email Address:</label>
                         <input type="email" id="email_address" name="email_address"
                                value="<?php echo htmlspecialchars($currentUser['email_address']); ?>"/>
                     </div>
-
                     <div>
                         <label for="phone_number">New Phone Number:</label>
                         <input type="tel" id="phone_number" name="phone_number"
                                value="<?php echo htmlspecialchars($currentUser['phone_number']); ?>"/>
                     </div>
-
                     <div>
                         <button type="submit" name="update_profile">Update Profile</button>
                     </div>
