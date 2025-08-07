@@ -21,11 +21,21 @@ $user = new User($databaseConnection);
 // call getter function so we can get private variable from user class
 $tableContent = $user->getContentTable();
 
-// image upload: assign user's filename, temp file name, and error message/result of upload
+// image upload: assign variables for user's filename, temp file name, error message/result of upload, and file size
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['user_image'])) {
     $fileName = $_FILES['user_image']['name'];
     $tempName = $_FILES['user_image']['tmp_name'];
     $uploadResult = $_FILES['user_image']['error'];
+    $fileSize = $_FILES['user_image']['size'];
+    // setting file size limit to 500 KB in bytes
+    $maxSize = 500 * 1024;
+
+    // if image is bigger than 500 KB, save error message, redirect to about page, and stop upload here
+    if ($fileSize > $maxSize) {
+        $_SESSION['error'] = "Image file is too large. Max file size is 2MB.";
+        header("Location: ../about.php");
+        exit;
+    }
 
     // if we didn't get an error, assign a target directory for the file
     if ($uploadResult === UPLOAD_ERR_OK) {
