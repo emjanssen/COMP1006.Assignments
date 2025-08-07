@@ -29,6 +29,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $error = "";
+$validationErrors = [];
 
 /* - - - Form Functions - - - */
 
@@ -70,25 +71,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // If $error is still its default value, we have not encountered any registration errors, and we redirect user to login page
+        /* If $error is still its default value:
+        - the passwords match
+        - the username doesn't exist yet
+        - the email doesn't exist yet
+        - and we move on to further input validation via validation.php functions */
         if ($error === "") {
-            if ($user->registerUser($username, $password, $firstName, $lastName, $emailAddress, $phoneNumber)) {
+            {
+                require_once './functions/validation.php';
 
-                // Get newly inserted user id
-                // PDO::lastInsertId() is a built-in function; returns ID of the last inserted row, if column is an AUTO_INCREMENT primary key
-                // has to be called on the same PDO connection that did the insert
-                $newUserId = $databaseConnection->lastInsertId();
+                $usernameValidation = validateUsername($username);
+                $firstNameValidation = validateFirstName($firstName);
+                $lastNameValidation = validateLastName($lastName);
+                $emailValidation = validateEmail($emailAddress);
+                $phoneNumberValidation = validatePhoneNumber($phoneNumber);
 
-                // Create default content for this user
-                $user->createDefaultContent($newUserId);
+                if ($usernameValidation === null && $firstNameValidation === null && $lastNameValidation === null && $emailValidation === null && $phoneNumberValidation === null) {
 
-                header('Location: login.php');
-                exit;
-            }
-            // If $error is anything but the default value, we assign $error a general registration failed message
-            // In-future, would be good to have this function handle multiple error messages
-            else {
-                $error = "Registration failed.";
+                    if ($user->registerUser($username, $password, $firstName, $lastName, $emailAddress, $phoneNumber)) {
+
+                        // Get newly inserted user id
+                        // PDO::lastInsertId() is a built-in function; returns ID of the last inserted row, if column is an AUTO_INCREMENT primary key
+                        // has to be called on the same PDO connection that did the insert
+                        $newUserId = $databaseConnection->lastInsertId();
+
+                        // Create default content for this user
+                        $user->createDefaultContent($newUserId);
+
+                        header('Location: login.php');
+                        exit;
+                    } else {
+                        $error = "Registration failed due to a system error.";
+                    }
+                } else {
+
+
+                    if ($usernameValidation !== null) {
+                        $validationErrors[] = $usernameValidation;
+                    }
+                    if ($firstNameValidation !== null) {
+                        $validationErrors[] = $firstNameValidation;
+                    }
+                    if ($lastNameValidation !== null) {
+                        $validationErrors[] = $lastNameValidation;
+                    }
+                    if ($emailValidation !== null) {
+                        $validationErrors[] = $emailValidation;
+                    }
+                    if ($phoneNumberValidation !== null) {
+                        $validationErrors[] = $phoneNumberValidation;
+                    }
+                }
             }
         }
     }
@@ -103,42 +136,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="global-main">
 
         <section id="register-landing">
-        <!-- if we have an error message value, echo the error message in red -->
-        <?php if (!empty($error)) {echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';}?>
+            <!-- if we have an error message value, echo the error message in red -->
+            <?php if (!empty($error)) {
+                echo '<p style="color: red;">' . htmlspecialchars($error) . '</p>';
+            } ?>
 
-        <form method="POST" action="register.php">
-            <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div>
-                <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name" required>
-            </div>
-            <div>
-                <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name" required>
-            </div>
-            <div>
-                <label for="email_address">Email Address:</label>
-                <input type="email" id="email_address" name="email_address" required>
-            </div>
-            <div>
-                <label for="phone_number">Phone number:</label>
-                <input type="tel" id="phone_number" name="phone_number" required>
-            </div>
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div>
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            <div>
-                <button type="submit">Register</button>
-            </div>
-        </form>
+            <?php if (!empty($error) || !empty($validationErrors)): ?>
+                <table style="color: red; margin-bottom: 1rem;">
+                    <thead>
+                    <tr>
+                        <th>Errors</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php if (!empty($error)): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($error); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php foreach ($validationErrors as $message): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($message); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+
+
+            <form method="POST" action="register.php">
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div>
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                <div>
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                <div>
+                    <label for="email_address">Email Address:</label>
+                    <input type="email" id="email_address" name="email_address" required>
+                </div>
+                <div>
+                    <label for="phone_number">Phone number:</label>
+                    <input type="tel" id="phone_number" name="phone_number" required>
+                </div>
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div>
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <div>
+                    <button type="submit">Register</button>
+                </div>
+            </form>
         </section>
     </main>
 
