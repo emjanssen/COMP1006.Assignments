@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
     if ($titleValidation === null) {
         $titleUpdated = $user->updateUserTitle($userId, $title);
         if (!$titleUpdated) {
-            $error = "Failed to update title";
+            $titleError = "Failed to update title";
         }
     } else {
         $titleError = $titleValidation;
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
     if ($bodyValidation === null) {
         $bodyUpdated = $user->updateUserBody($userId, $body);
         if (!$bodyUpdated) {
-            $error = $error ? $error . " and body" : "Failed to update body";
+            $bodyError = "Failed to update body";
         }
     } else {
         $bodyError = $bodyValidation;
