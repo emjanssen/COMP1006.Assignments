@@ -37,9 +37,10 @@ class Database
             // can pass in three arguments: error message, append attribute, and file path to error log
             // generally going to use interpolation instead of concatenation for this assignment
         } catch (PDOException $exception) {
+            $logFile = __DIR__ . '/../notes/error_log.txt';
             error_log(
-                "DB connection error: {$exception->getMessage()}", 3, '../errors/error_log');
-            // echo a more generic message for the user
+                "DB connection error: {$exception->getMessage()}", 3, $logFile
+            );
             die("Sorry, we were unable to process your request.");
         }
     }
