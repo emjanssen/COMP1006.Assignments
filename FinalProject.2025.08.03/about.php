@@ -3,11 +3,17 @@
 
 session_start();
 
-// - - - Success Values - - //
+// - - - Success/Error Values - - //
 
+// if we have success or error messages saved into our sessions, save those to a variable, then unset the error/success message
 if (isset($_SESSION['success'])) {
     $success = $_SESSION['success'];
     unset($_SESSION['success']);
+}
+
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+    unset($_SESSION['error']);
 }
 
 // - - - Page Metadata - - - //
@@ -121,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
 
             <div id="about-one">
 
+                <!-- Form for title and body -->
                 <form method="POST" action="about.php" id="form-profile-update-content">
                     <div>
                         <label for="user_title">Title:</label>
@@ -147,6 +154,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                     </div>
                 </form>
 
+                <form method="POST" action="./functions/photo.php" enctype="multipart/form-data" id="form-image">
+                    <div id="inner-form-image">
+                    <div>
+                        <input type="file" id="user_image" name="user_image"/>
+                    </div>
+                    <div>
+                        <button type="submit" id="update-photo">Update Photo</button>
+                    </div>
+                    </div>
+                </form>
+
                 <!-- // - - - About Two - - - // -->
 
                 <div id="about-two">
@@ -164,8 +182,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                     </p>
 
                     <figure>
-                        <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
-                        <figcaption>User photo and caption go here.</figcaption>
+                        <?php if (!empty($userContent['user_image'])): ?>
+                            <img src="<?php echo htmlspecialchars($userContent['user_image']); ?>"
+                                 alt="User uploaded image">
+                            <figcaption>This is your uploaded photo.</figcaption>
+                        <?php else: ?>
+                            <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
+                            <figcaption>User photo and caption go here.</figcaption>
+                        <?php endif; ?>
                     </figure>
                 </div>
             </div>
