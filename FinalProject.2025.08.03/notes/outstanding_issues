@@ -1,7 +1,5 @@
 About.php:
-1. Error/success messages not printing in response to body and title content updates
-- Content is updating properly, and invalid inputs are being caught, but the echos are not printing
-2. No delete function yet for body, title, and image inputs
+1. No delete function yet for body, title, and image inputs
 
 Photo.php:
 1. Still need photo validation re: size
