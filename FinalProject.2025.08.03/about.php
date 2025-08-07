@@ -45,39 +45,35 @@ if (isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_content'])) {
-        $newTitle = trim($_POST['user_title'] ?? '');
-        $newBody = trim($_POST['user_body'] ?? '');
+        $title = trim($_POST['user_title'] ?? '');
+        $body = trim($_POST['user_body'] ?? '');
 
-        $somethingUpdated = false;
+        $titleUpdated = false;
+        $bodyUpdated = false;
 
         // Title
-        $titleValidation = validateTitle($newTitle);
+        $titleValidation = validateTitle($title);
+        // return the result of title validation
         if ($titleValidation === null) {
-            if ($user->updateUserTitle($userId, $newTitle)) {
-                $somethingUpdated = true;
-            } else {
-                $titleError = "Couldn't update title.";
-            }
+            // if null, it passed checks and is valid
+            $user->updateUserTitle($userId, $title);
+            $titleUpdated = true;
         } else {
+            // if result wasn't null, we assign the returned error message to out error variable
             $titleError = $titleValidation;
         }
 
         // Body
-        $bodyValidation = validateBody($newBody);
+        $bodyValidation = validateBody($body);
         if ($bodyValidation === null) {
-            if ($user->updateUserBody($userId, $newBody)) {
-                $somethingUpdated = true;
-            } else {
-                $bodyError = "Couldn't update body.";
-            }
+            $user->updateUserBody($userId, $body);
+            $bodyUpdated = true;
         } else {
             $bodyError = $bodyValidation;
         }
 
-        if ($somethingUpdated) {
+        if ($titleUpdated || $bodyUpdated) {
             $success = "Your content was updated.";
-        } elseif (empty($titleError) && empty($bodyError)) {
-            $error = "Nothing was updated.";
         }
 
         $userContent = $user->getUserContent($userId);
@@ -105,9 +101,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
             <?php endif; ?>
 
+            <!-- // - - - About One - - - // -->
+
             <div id="about-one">
 
-                <!-- Update Content -->
                 <form method="POST" action="about.php" id="form-profile-update-content">
                     <div>
                         <label for="user_title">Title:</label>
@@ -117,38 +114,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 name="user_title"
                                 value="<?php echo htmlspecialchars($_POST['user_title'] ?? $currentUser['user_title'] ?? ''); ?>"
                         />
-                        <?php if (!empty($titleError)): ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($titleError); ?></p>
-                        <?php endif; ?>
                     </div>
-
                     <div>
                         <label for="user_body">Body:</label>
                         <textarea
                                 id="user_body"
                                 name="user_body"
                         ><?php echo htmlspecialchars($_POST['user_body'] ?? $currentUser['user_body'] ?? ''); ?></textarea>
-                        <?php if (!empty($bodyError)): ?>
-                            <p style="color: red;"><?php echo htmlspecialchars($bodyError); ?></p>
-                        <?php endif; ?>
                     </div>
-
                     <div>
                         <button type="submit" name="update_content">Update Content</button>
                     </div>
                 </form>
 
+                <!-- // - - - About Two - - - // -->
+
                 <div id="about-two">
                     <h2>
+                        <!-- is user isn't logged in, display default message; if they are, display their content -->
                         <?php echo !empty($userContent['user_title'])
                                 ? htmlspecialchars($userContent['user_title'])
                                 : "Please login to enter a title here."; ?>
                     </h2>
+
                     <p>
                         <?php echo !empty($userContent['user_body'])
                                 ? htmlspecialchars($userContent['user_body'])
                                 : "You'll also be able to enter some body content here."; ?>
                     </p>
+
                     <figure>
                         <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
                         <figcaption>User photo and caption go here.</figcaption>
