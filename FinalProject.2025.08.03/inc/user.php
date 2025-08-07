@@ -22,6 +22,13 @@ class User
         $this->connection = $databaseConnection;
     }
 
+    /* Getter */
+
+    // so we can call the private $tableContent value in photo.php
+    public function getContentTable(): string {
+        return $this->tableContent;
+    }
+
     /* - - - Methods - - - */
 
     // Does User Exist //
