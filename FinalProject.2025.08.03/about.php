@@ -43,19 +43,20 @@ $titleError = '';
 $bodyError = '';
 $success = '';
 
+// Create DB/User objects just once
 if (isset($_SESSION['user_id'])) {
-    // Create Database() and User() objects
     $database = new Database();
     $databaseConnection = $database->getDatabaseConnection();
     $user = new User($databaseConnection);
-
-    // Get user_id from the current session
     $userId = $_SESSION['user_id'];
-    // Get current user using that user_id
     $currentUser = $user->findUser($userId);
-    // Get current content data for user
+}
+
+// Always get the latest user content (after POST redirect)
+if (isset($user) && isset($userId)) {
     $userContent = $user->getUserContent($userId);
 }
+
 
 /* - - - Form Functions - - - */
 
@@ -156,12 +157,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
 
                 <form method="POST" action="./functions/photo.php" enctype="multipart/form-data" id="form-image">
                     <div id="inner-form-image">
-                    <div>
-                        <input type="file" id="user_image" name="user_image"/>
-                    </div>
-                    <div>
-                        <button type="submit" id="update-photo">Update Photo</button>
-                    </div>
+                        <div>
+                            <input type="file" id="user_image" name="user_image"/>
+                        </div>
+                        <div>
+                            <button type="submit" id="update-photo">Update Photo</button>
+                        </div>
                     </div>
                 </form>
 
@@ -185,10 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
                         <?php if (!empty($userContent['user_image'])): ?>
                             <img src="<?php echo htmlspecialchars($userContent['user_image']); ?>"
                                  alt="User uploaded image">
-                            <figcaption>This is your uploaded photo.</figcaption>
                         <?php else: ?>
                             <img src="css/img/about_WinterTrees.png" alt="Illustration of trees in the winter.">
-                            <figcaption>User photo and caption go here.</figcaption>
                         <?php endif; ?>
                     </figure>
                 </div>
