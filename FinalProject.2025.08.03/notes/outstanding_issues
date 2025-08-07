@@ -1,0 +1,3 @@
+About.php:
+- Error/success messages not printing in response to body and title content updates
+- Content is updating properly, and invalid inputs are being caught, but the echos are not printing
