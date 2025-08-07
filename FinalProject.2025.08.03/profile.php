@@ -183,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
 
                 <form method="POST" action="profile.php" id="form-profile-update-data">
                     <div>
-                        <label for="username">New Username:</label>
+                        <label for="username">Username:</label>
                         <input
                                 type="text"
                                 id="username"
@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                         />
                     </div>
                     <div>
-                        <label for="first_name">New First Name:</label>
+                        <label for="first_name">First Name:</label>
                         <input
                                 type="text"
                                 id="first_name"
@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                         />
                     </div>
                     <div>
-                        <label for="last_name">New Last Name:</label>
+                        <label for="last_name">Last Name:</label>
                         <input
                                 type="text"
                                 id="last_name"
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                         />
                     </div>
                     <div>
-                        <label for="email_address">New Email Address:</label>
+                        <label for="email_address">Email Address:</label>
                         <input
                                 type="email"
                                 id="email_address"
@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
                         />
                     </div>
                     <div>
-                        <label for="phone_number">New Phone Number:</label>
+                        <label for="phone_number">Phone Number:</label>
                         <input
                                 type="tel"
                                 id="phone_number"
