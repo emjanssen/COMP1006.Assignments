@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
     $emailValidation     = validateEmail($newEmail);
     $phoneValidation     = validatePhoneNumber($newPhone);
 
-    // Collect validation errors
+    // Collect validation notes
     if ($usernameValidation !== null)  $errors[] = $usernameValidation;
     if ($firstNameValidation !== null) $errors[] = $firstNameValidation;
     if ($lastNameValidation !== null)  $errors[] = $lastNameValidation;
