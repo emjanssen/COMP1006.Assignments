@@ -20,6 +20,10 @@ require './inc/user.php';
 
 /* - - - Run On Page Load - - - */
 
+// defining as empty arrays, because there will be no value for users who aren't logged in
+$currentUser = [];
+$userContent = [];
+
 // Initialize error and success message variables
 $error = '';
 $titleError = '';
@@ -118,13 +122,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 name="user_title"
                                 value="<?php echo htmlspecialchars($_POST['user_title'] ?? $currentUser['user_title'] ?? ''); ?>"
                         />
+                        <?php if (!empty($titleError)): ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($titleError); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div>
                         <label for="user_body">Body:</label>
-                        <textarea
-                                id="user_body"
-                                name="user_body"
-                        ><?php echo htmlspecialchars($_POST['user_body'] ?? $currentUser['user_body'] ?? ''); ?></textarea>
+                        <textarea id="user_body" name="user_body"><?php echo htmlspecialchars($_POST['user_body'] ?? $currentUser['user_body'] ?? ''); ?></textarea>
+                        <?php if (!empty($bodyError)): ?>
+                            <p style="color: red;"><?php echo htmlspecialchars($bodyError); ?></p>
+                        <?php endif; ?>
                     </div>
                     <div>
                         <button type="submit" name="update_content">Update Content</button>
