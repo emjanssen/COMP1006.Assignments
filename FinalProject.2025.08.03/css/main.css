@@ -325,6 +325,28 @@ figure {
     width: 100%;
 }
 
+#inner-form-image {
+    display: flex;
+    flex-direction: column;
+}
+
+#update-photo {
+    width: 100%;
+    padding: 1rem;
+}
+
+#form-image {
+    margin: 2rem;
+    padding: .75rem;
+}
+
+#inner-form-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Dashboard Page */
 
 #landing-dashboard {
@@ -376,7 +398,6 @@ figure {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     cursor: pointer;
 }
-
 
 /* - - - Footer - - - */
 
