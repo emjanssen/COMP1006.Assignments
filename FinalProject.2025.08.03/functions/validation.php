@@ -1,12 +1,4 @@
 <?php
-/* - - - Run On Page Load - - - */
-
-// validate user login
-// if user is not logged in, print an error message and terminate page script
-if (!isset($_SESSION['user_id'])) {
-    http_response_code(403);
-    exit('Unauthorized');
-}
 
 /* - - - Functions - - - */
 
@@ -23,7 +15,7 @@ function validateUsername(string $username): string|null
         return "Username is required.";
     }
     if (strlen($username) < 5 || strlen($username) > 15) {
-        return "Please enter a username 5 and 15 characters.";
+        return "Please enter a username between 5 and 15 characters.";
     }
     if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
         return "Username can only contain letters, numbers, and underscores.";
@@ -65,7 +57,7 @@ function validateLastName(string $lastName): string|null
         return "Please enter a name between 1 and 20 characters.";
     }
     if (!preg_match('/^[a-zA-Z\s\'-]+$/', $lastName)) {
-        return "First name can only contain letters, spaces, hyphens, and apostrophes.";
+        return "Last name can only contain letters, spaces, hyphens, and apostrophes.";
     }
 
     return null;

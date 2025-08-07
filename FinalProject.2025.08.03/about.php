@@ -46,45 +46,50 @@ if (isset($_SESSION['user_id'])) {
 
 /* - - - Form Functions - - - */
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['update_content'])) {
-        if (isset($_SESSION['user_id'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_content'])) {
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit;
+    }
+    require_once './functions/validation.php';
 
-            require_once './functions/validation.php';
+    $userId = $_SESSION['user_id'];
+    $title = trim($_POST['user_title'] ?? '');
+    $body = trim($_POST['user_body'] ?? '');
+    $titleUpdated = false;
+    $bodyUpdated = false;
 
-            $title = trim($_POST['user_title'] ?? '');
-            $body = trim($_POST['user_body'] ?? '');
-
-            $titleUpdated = false;
-            $bodyUpdated = false;
-
-            // Title
-            $titleValidation = validateTitle($title);
-            // return the result of title validation
-            if ($titleValidation === null) {
-                // if null, it passed checks and is valid
-                $user->updateUserTitle($userId, $title);
-                $titleUpdated = true;
-            } else {
-                // if result wasn't null, we assign the returned error message to out error variable
-                $titleError = $titleValidation;
-            }
-
-            // Body
-            $bodyValidation = validateBody($body);
-            if ($bodyValidation === null) {
-                $user->updateUserBody($userId, $body);
-                $bodyUpdated = true;
-            } else {
-                $bodyError = $bodyValidation;
-            }
-
-            if ($titleUpdated || $bodyUpdated) {
-                $success = "Your content was updated.";
-            }
-
-            $userContent = $user->getUserContent($userId);
+    // Title
+    $titleValidation = validateTitle($title);
+    // return the result of title validation
+    if ($titleValidation === null) {
+        // if null, it passed checks and is valid
+        $titleUpdated = $user->updateUserTitle($userId, $title);
+        if (!$titleUpdated) {
+            $error = "Failed to update title";
         }
+    } else {
+        // if result wasn't null, we assign the returned error message to out error variable
+        $titleError = $titleValidation;
+    }
+
+    // Body
+    $bodyValidation = validateBody($body);
+    if ($bodyValidation === null) {
+        $bodyUpdated = $user->updateUserBody($userId, $body);
+        if (!$bodyUpdated) {
+            $error = "Failed to update body.";
+        } else {
+            $bodyError = $bodyValidation;
+        }
+
+        if ($titleUpdated || $bodyUpdated) {
+            $success = "Your content was updated.";
+            header("Location: about.php");
+            exit;
+        }
+
+        $userContent = $user->getUserContent($userId);
     }
 }
 ?>
@@ -120,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 type="text"
                                 id="user_title"
                                 name="user_title"
-                                value="<?php echo htmlspecialchars($_POST['user_title'] ?? $currentUser['user_title'] ?? ''); ?>"
+                                value="<?php echo htmlspecialchars($_POST['user_title'] ?? $userContent['user_title'] ?? ''); ?>"
                         />
                         <?php if (!empty($titleError)): ?>
                             <p style="color: red;"><?php echo htmlspecialchars($titleError); ?></p>
@@ -128,7 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div>
                         <label for="user_body">Body:</label>
-                        <textarea id="user_body" name="user_body"><?php echo htmlspecialchars($_POST['user_body'] ?? $currentUser['user_body'] ?? ''); ?></textarea>
+                        <textarea id="user_body"
+                                  name="user_body"><?php echo htmlspecialchars($_POST['user_body'] ?? $userContent['user_body'] ?? ''); ?></textarea>
                         <?php if (!empty($bodyError)): ?>
                             <p style="color: red;"><?php echo htmlspecialchars($bodyError); ?></p>
                         <?php endif; ?>
