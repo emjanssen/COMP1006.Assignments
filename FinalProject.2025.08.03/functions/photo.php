@@ -47,14 +47,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['user_image'])) {
 
         $targetFile = $directory . basename($fileName);
 
+        // - - - Leaving in for Debug Purposes - - - //
+
+        /* When I try to use (move_uploaded_file($tempName, $targetFile)), I get the following die() message:
+        / Upload directory is not writable: /home/Elizabeth200627709/public_html/summer2025/COMP1006-PHP/COMP1006.Assignments/FinalProject.2025.08.03/uploads */
+        if (!is_dir($directory)) {
+            die("Upload directory does not exist: " . realpath($directory));
+        }
+        if (!is_writable($directory)) {
+            die("Upload directory is not writable: " . realpath($directory));
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - //
+
         if (move_uploaded_file($tempName, $targetFile)) {
-            // going go try just uploads/filename and see if filezilla can resolve that filepath
-            $imagePathForDatabase = "uploads/" . $fileName;
 
             $sql = "UPDATE {$tableContent} SET user_image = :user_image WHERE user_id = :user_id";
             $stmt = $databaseConnection->prepare($sql);
             $stmt->execute([
-                ':user_image' => $imagePathForDatabase,
+                ':user_image' => $targetFile,
                 ':user_id' => $userId
             ]);
 
