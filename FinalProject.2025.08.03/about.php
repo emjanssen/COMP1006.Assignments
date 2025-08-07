@@ -17,7 +17,6 @@ require './templates/head.php';
 
 require './inc/database.php';
 require './inc/user.php';
-require './functions/validation.php';
 
 /* - - - Run On Page Load - - - */
 
@@ -45,38 +44,43 @@ if (isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_content'])) {
-        $title = trim($_POST['user_title'] ?? '');
-        $body = trim($_POST['user_body'] ?? '');
+        if (isset($_SESSION['user_id'])) {
 
-        $titleUpdated = false;
-        $bodyUpdated = false;
+            require_once './functions/validation.php';
 
-        // Title
-        $titleValidation = validateTitle($title);
-        // return the result of title validation
-        if ($titleValidation === null) {
-            // if null, it passed checks and is valid
-            $user->updateUserTitle($userId, $title);
-            $titleUpdated = true;
-        } else {
-            // if result wasn't null, we assign the returned error message to out error variable
-            $titleError = $titleValidation;
+            $title = trim($_POST['user_title'] ?? '');
+            $body = trim($_POST['user_body'] ?? '');
+
+            $titleUpdated = false;
+            $bodyUpdated = false;
+
+            // Title
+            $titleValidation = validateTitle($title);
+            // return the result of title validation
+            if ($titleValidation === null) {
+                // if null, it passed checks and is valid
+                $user->updateUserTitle($userId, $title);
+                $titleUpdated = true;
+            } else {
+                // if result wasn't null, we assign the returned error message to out error variable
+                $titleError = $titleValidation;
+            }
+
+            // Body
+            $bodyValidation = validateBody($body);
+            if ($bodyValidation === null) {
+                $user->updateUserBody($userId, $body);
+                $bodyUpdated = true;
+            } else {
+                $bodyError = $bodyValidation;
+            }
+
+            if ($titleUpdated || $bodyUpdated) {
+                $success = "Your content was updated.";
+            }
+
+            $userContent = $user->getUserContent($userId);
         }
-
-        // Body
-        $bodyValidation = validateBody($body);
-        if ($bodyValidation === null) {
-            $user->updateUserBody($userId, $body);
-            $bodyUpdated = true;
-        } else {
-            $bodyError = $bodyValidation;
-        }
-
-        if ($titleUpdated || $bodyUpdated) {
-            $success = "Your content was updated.";
-        }
-
-        $userContent = $user->getUserContent($userId);
     }
 }
 ?>
