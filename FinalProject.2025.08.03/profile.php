@@ -9,7 +9,7 @@ $pageTitle = 'Profile';
 $pageDescription = 'User profile page.';
 $pageKeywords = 'profile, users, accounts';
 
-// - - - Head - - - //
+// - - - Head - - - // 
 
 require './templates/head.php';
 
