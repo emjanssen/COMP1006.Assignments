@@ -1,12 +1,15 @@
 About.php:
-1. Error/success messages not printing in response to body and title content updates
-- Content is updating properly, and invalid inputs are being caught, but the echos are not printing
-2. No delete function yet for body, title, and image inputs
+1. No delete function yet for body, title, and image inputs
 
 Photo.php:
 1. Updated photo is not echoing on about page
-- Photo is being uploaded to uploads folder, and the filepath is reflected in the database
+- Photo is successfully being uploaded to uploads folder, and the filepath is reflected in the database
 2. Still need photo validation re: size
 
 Dashboard.php:
 1. Delete user function works; still need an update user function
+
+Site-wide:
+1. Inconsistent error processing and echoing
+- Something to clean up/do better in future
+- Might make a utility class/file for more consistent error and echo functions
